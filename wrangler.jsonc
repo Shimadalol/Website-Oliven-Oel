@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "website-oliven-oel",
+  "compatibility_date": "2025-09-27",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "Oliven-l-Beispiel-Website"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
