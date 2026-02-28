@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 const FARMERS = [
   { name: 'Familie Kydonakis', region: 'Chania, Kreta', country: 'Griechenland', specialty: 'Koroneiki-Oliven, frühe Ernte', since: 'Seit 4 Generationen', image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Familie Papadakis', region: 'Heraklion, Kreta', country: 'Griechenland', specialty: 'Bio-zertifiziert, Hochphenolisch', since: 'Seit 3 Generationen', image: 'https://images.unsplash.com/photo-1464960726342-683236c5622a?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Familie Manolis', region: 'Rethymnon, Kreta', country: 'Griechenland', specialty: 'Kaltgepresst, sortenrein', since: 'Seit 5 Generationen', image: 'https://images.unsplash.com/photo-1501004318855-e5986c7a0e1f?auto=format&fit=crop&q=80&w=600' },
+  { name: 'Familie Papadakis', region: 'Heraklion, Kreta', country: 'Griechenland', specialty: 'Bio-zertifiziert, Hochphenolisch', since: 'Seit 3 Generationen', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&q=80&w=600' },
+  { name: 'Familie Manolis', region: 'Rethymnon, Kreta', country: 'Griechenland', specialty: 'Kaltgepresst, sortenrein', since: 'Seit 5 Generationen', image: 'https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&q=80&w=600' },
   { name: 'Familie Stavros', region: 'Sitia, Kreta', country: 'Griechenland', specialty: 'Tsounati-Oliven, mild-fruchtig', since: 'Seit 2 Generationen', image: 'https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=600' },
   { name: 'Famiglia Rossi', region: 'Puglia', country: 'Italien', specialty: 'Coratina, intensiv-herbe Note', since: 'Seit 6 Generationen', image: 'https://images.unsplash.com/photo-1534710961216-75c88202f43e?auto=format&fit=crop&q=80&w=600' },
   { name: 'Famiglia Bianchi', region: 'Toskana', country: 'Italien', specialty: 'Frantoio-Blend, ausgewogen', since: 'Seit 3 Generationen', image: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=600' },
@@ -157,7 +157,7 @@ export default function StoryPage() {
                 transition={{ delay: i * 0.1 }}
                 className="group bg-olive-50 rounded-3xl overflow-hidden border border-olive-100 cursor-pointer hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="aspect-[4/3] overflow-hidden">
+                <div className="aspect-4/3 overflow-hidden">
                   <img 
                     src={farmer.image} 
                     alt={farmer.name} 
