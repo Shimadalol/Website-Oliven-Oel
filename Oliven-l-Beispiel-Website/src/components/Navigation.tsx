@@ -3,11 +3,13 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingBag, Menu, X, Droplets } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
+import { useCart } from '../context/CartContext';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { totalItems, toggleCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -39,9 +41,20 @@ export function Navigation() {
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="p-2 hover:bg-olive-100 rounded-full transition-colors duration-200 cursor-pointer relative hidden sm:block">
+            <button
+              onClick={toggleCart}
+              className="p-2 hover:bg-olive-100 rounded-full transition-colors duration-200 cursor-pointer relative"
+            >
               <ShoppingBag size={22} />
-              <span className="absolute top-0 right-0 w-4 h-4 bg-terracotta text-white text-[10px] flex items-center justify-center rounded-full">0</span>
+              {totalItems > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 w-5 h-5 bg-terracotta text-white text-[10px] flex items-center justify-center rounded-full font-bold"
+                >
+                  {totalItems > 99 ? '99+' : totalItems}
+                </motion.span>
+              )}
             </button>
             <button 
               className="md:hidden p-2 hover:bg-olive-100 rounded-full transition-colors duration-200 cursor-pointer"
@@ -73,3 +86,4 @@ export function Navigation() {
     </>
   );
 }
+

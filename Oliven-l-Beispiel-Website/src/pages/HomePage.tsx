@@ -17,8 +17,11 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PRODUCTS, TESTIMONIALS } from '../data';
+import { useCart } from '../context/CartContext';
 
 export default function HomePage() {
+  const { addItem } = useCart();
+
   return (
     <main className="grow">
       {/* Launch Offer Banner */}
@@ -170,7 +173,13 @@ export default function HomePage() {
                       )}
                       <span className="text-xs text-olive-500 block">inkl. MwSt.</span>
                     </div>
-                    <button className="bg-charcoal text-white p-4 rounded-2xl hover:bg-charcoal/80 transition-colors duration-200 cursor-pointer shadow-md hover:shadow-lg">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addItem(product);
+                      }}
+                      className="bg-charcoal text-white p-4 rounded-2xl hover:bg-charcoal/80 transition-colors duration-200 cursor-pointer shadow-md hover:shadow-lg active:scale-95"
+                    >
                       <ShoppingBag size={20} />
                     </button>
                   </div>

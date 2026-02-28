@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
+import { CartDrawer } from './components/CartDrawer';
+import { CartProvider } from './context/CartContext';
 import HomePage from './pages/HomePage';
 import StoryPage from './pages/StoryPage';
 import QualityPage from './pages/QualityPage';
@@ -29,6 +31,7 @@ function AppLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
+      <CartDrawer />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -44,7 +47,10 @@ function AppLayout() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppLayout />
+      <CartProvider>
+        <AppLayout />
+      </CartProvider>
     </BrowserRouter>
   );
 }
+
