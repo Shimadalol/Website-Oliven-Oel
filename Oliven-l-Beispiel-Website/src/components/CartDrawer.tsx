@@ -1,9 +1,11 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, totalItems, totalPrice, updateQuantity, removeItem, clearCart } = useCart();
+  const navigate = useNavigate();
 
   return (
     <AnimatePresence>
@@ -163,7 +165,13 @@ export function CartDrawer() {
                 </div>
 
                 {/* Checkout Button */}
-                <button className="w-full bg-olive-600 hover:bg-olive-700 text-white py-4 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-olive-600/20 cursor-pointer">
+                <button 
+                  onClick={() => {
+                    closeCart();
+                    navigate('/checkout');
+                  }}
+                  className="w-full bg-olive-600 hover:bg-olive-700 text-white py-4 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-olive-600/20 cursor-pointer"
+                >
                   Zur Kasse ({totalPrice >= 50 ? totalPrice.toFixed(2) : (totalPrice + 4.90).toFixed(2)}€)
                 </button>
 

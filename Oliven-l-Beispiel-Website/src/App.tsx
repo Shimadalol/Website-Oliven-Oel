@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import StoryPage from './pages/StoryPage';
 import QualityPage from './pages/QualityPage';
 import B2BPage from './pages/B2BPage';
+import CheckoutPage from './pages/CheckoutPage';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -38,6 +39,7 @@ function AppLayout() {
         <Route path="/story" element={<StoryPage />} />
         <Route path="/quality" element={<QualityPage />} />
         <Route path="/b2b" element={<B2BPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
       <Footer />
     </div>
