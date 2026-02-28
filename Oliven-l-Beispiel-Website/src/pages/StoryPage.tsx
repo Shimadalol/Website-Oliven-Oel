@@ -72,7 +72,11 @@ export default function StoryPage() {
               </div>
             </div>
             <div className="relative">
-              <img 
+              <motion.img 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&q=80&w=1000" 
                 alt="Olivenernte" 
                 className="rounded-[40px] shadow-2xl"
@@ -161,7 +165,7 @@ export default function StoryPage() {
                   <img 
                     src={farmer.image} 
                     alt={farmer.name} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
                 </div>

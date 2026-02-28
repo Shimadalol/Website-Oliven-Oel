@@ -95,7 +95,7 @@ export default function CheckoutPage() {
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-olive-700 mb-1">E-Mail Adresse *</label>
-                    <input required type="email" id="email" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-2 focus:ring-olive-600 focus:border-transparent transition-shadow" placeholder="max@beispiel.de" />
+                    <input required type="email" id="email" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" placeholder="max@beispiel.de" />
                   </div>
                 </div>
               </div>
@@ -106,23 +106,23 @@ export default function CheckoutPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-olive-700 mb-1">Vorname *</label>
-                    <input required type="text" id="firstName" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-2 focus:ring-olive-600 focus:border-transparent transition-shadow" />
+                    <input required type="text" id="firstName" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
                   </div>
                   <div>
                     <label htmlFor="lastName" className="block text-sm font-medium text-olive-700 mb-1">Nachname *</label>
-                    <input required type="text" id="lastName" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-2 focus:ring-olive-600 focus:border-transparent transition-shadow" />
+                    <input required type="text" id="lastName" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
                   </div>
                   <div className="md:col-span-2">
                     <label htmlFor="address" className="block text-sm font-medium text-olive-700 mb-1">Straße & Hausnummer *</label>
-                    <input required type="text" id="address" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-2 focus:ring-olive-600 focus:border-transparent transition-shadow" />
+                    <input required type="text" id="address" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
                   </div>
                   <div>
                     <label htmlFor="zip" className="block text-sm font-medium text-olive-700 mb-1">Postleitzahl *</label>
-                    <input required type="text" id="zip" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-2 focus:ring-olive-600 focus:border-transparent transition-shadow" />
+                    <input required type="text" id="zip" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
                   </div>
                   <div>
                     <label htmlFor="city" className="block text-sm font-medium text-olive-700 mb-1">Stadt *</label>
-                    <input required type="text" id="city" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-2 focus:ring-olive-600 focus:border-transparent transition-shadow" />
+                    <input required type="text" id="city" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
                   </div>
                 </div>
               </div>

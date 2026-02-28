@@ -39,7 +39,10 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
+          <motion.img 
+            initial={{ scale: 1.05, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000"
             alt="Olivenhaine im Mittelmeerraum" 
             className="w-full h-full object-cover"
@@ -129,8 +132,11 @@ export default function HomePage() {
             {PRODUCTS.map((product) => (
               <motion.div 
                 key={product.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 whileHover={{ y: -8 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="group bg-olive-50 rounded-3xl overflow-hidden border border-olive-100 flex flex-col h-full cursor-pointer"
               >
                 <div className="aspect-square overflow-hidden relative">
@@ -196,7 +202,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
               <div className="relative">
-                <img 
+                <motion.img 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
                   src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&q=80&w=1000" 
                   alt="Olivenöl wird eingegossen" 
                   className="rounded-[40px] shadow-2xl"
@@ -284,10 +294,14 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-olive-100 rounded-full -z-10" />
-              <img 
+              <motion.img 
+                initial={{ opacity: 0, rotate: 10, scale: 0.95 }}
+                whileInView={{ opacity: 1, rotate: 3, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 1, ease: "easeOut" }}
                 src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1000" 
                 alt="Olivenbaum in Kreta" 
-                className="rounded-[40px] shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700"
+                className="rounded-[40px] shadow-2xl hover:rotate-0 transition-transform duration-700 cursor-pointer"
                 referrerPolicy="no-referrer"
               />
             </div>

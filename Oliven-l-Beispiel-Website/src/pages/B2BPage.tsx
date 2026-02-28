@@ -162,20 +162,20 @@ export default function B2BPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-bold mb-2">Name *</label>
-                  <input id="name" type="text" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-2 focus:ring-olive-500" />
+                  <input id="name" type="text" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
                 </div>
                 <div>
                   <label htmlFor="restaurant" className="block text-sm font-bold mb-2">Restaurant / Betrieb *</label>
-                  <input id="restaurant" type="text" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-2 focus:ring-olive-500" />
+                  <input id="restaurant" type="text" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
                 </div>
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-bold mb-2">E-Mail *</label>
-                <input id="email" type="email" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-2 focus:ring-olive-500" />
+                <input id="email" type="email" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
               </div>
               <div>
                 <label htmlFor="volume" className="block text-sm font-bold mb-2">Geschätztes monatliches Volumen</label>
-                <select id="volume" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-2 focus:ring-olive-500 cursor-pointer">
+                <select id="volume" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 cursor-pointer transition-shadow">
                   <option>20-50 Liter</option>
                   <option>50-100 Liter</option>
                   <option>100-200 Liter</option>
@@ -184,7 +184,7 @@ export default function B2BPage() {
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-bold mb-2">Nachricht</label>
-                <textarea id="message" rows={4} className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-2 focus:ring-olive-500 resize-none" />
+                <textarea id="message" rows={4} className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 resize-none transition-shadow" />
               </div>
               <button type="submit" className="w-full bg-olive-600 hover:bg-olive-700 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer flex items-center justify-center gap-2">
                 Anfrage absenden <ArrowRight size={20} />

@@ -23,7 +23,7 @@ export function Navigation() {
     <>
       <nav className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4",
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-3" : "bg-transparent"
+        scrolled ? "bg-white/70 backdrop-blur-xl border-b border-black/5 shadow-sm py-3" : "bg-transparent"
       )}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 cursor-pointer">

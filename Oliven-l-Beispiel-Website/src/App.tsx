@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
@@ -9,8 +10,6 @@ import QualityPage from './pages/QualityPage';
 import B2BPage from './pages/B2BPage';
 import CheckoutPage from './pages/CheckoutPage';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
@@ -29,18 +28,30 @@ function ScrollToTop() {
 }
 
 function AppLayout() {
+  const location = useLocation();
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
       <CartDrawer />
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/story" element={<StoryPage />} />
-        <Route path="/quality" element={<QualityPage />} />
-        <Route path="/b2b" element={<B2BPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="flex flex-col grow"
+        >
+          <Routes location={location}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/story" element={<StoryPage />} />
+            <Route path="/quality" element={<QualityPage />} />
+            <Route path="/b2b" element={<B2BPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
       <Footer />
     </div>
   );
