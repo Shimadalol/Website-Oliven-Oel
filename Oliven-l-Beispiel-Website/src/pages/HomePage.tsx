@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { 
   ShoppingBag, 
   CheckCircle2, 
@@ -19,8 +19,25 @@ import { Link } from 'react-router-dom';
 import { PRODUCTS, TESTIMONIALS } from '../data';
 import { useCart } from '../context/CartContext';
 
+const Hotspot = ({ top, left, title, desc }: { top: string, left: string, title: string, desc: string }) => (
+  <div className="absolute group z-20 cursor-pointer" style={{ top, left }}>
+    <span className="flex h-5 w-5 relative">
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-harvest-gold opacity-75"></span>
+      <span className="relative inline-flex rounded-full h-5 w-5 bg-harvest-gold border-2 border-white shadow-md"></span>
+    </span>
+    <div className="absolute left-8 top-1/2 -translate-y-1/2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 bg-white/95 backdrop-blur-md border border-white/40 p-3 rounded-xl shadow-xl z-30 transform -translate-x-2 group-hover:translate-x-0">
+      <p className="font-bold text-xs text-charcoal mb-1">{title}</p>
+      <p className="text-[10px] text-olive-600 leading-tight">{desc}</p>
+    </div>
+  </div>
+);
+
 export default function HomePage() {
   const { addItem } = useCart();
+  const { scrollY } = useScroll();
+  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+  const heroScale = useTransform(scrollY, [0, 500], [1, 1.1]);
 
   return (
     <motion.main 
@@ -43,8 +60,11 @@ export default function HomePage() {
       </section>
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      <section className="relative h-[90vh] flex items-center overflow-hidden bg-olive-950">
+        <motion.div 
+          className="absolute inset-0 z-0 origin-top"
+          style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}
+        >
           <motion.img 
             initial={{ scale: 1.05, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -55,8 +75,8 @@ export default function HomePage() {
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-linear-to-r from-olive-950/70 to-transparent" />
-        </div>
+          <div className="absolute inset-0 bg-linear-to-r from-olive-950/80 to-transparent" />
+        </motion.div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
           <motion.div 
@@ -218,7 +238,7 @@ export default function HomePage() {
                   src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&fm=webp&q=80&w=1000" 
                   alt="Olivenöl wird eingegossen" 
                   loading="lazy"
-                  className="rounded-[40px] shadow-2xl"
+                  className="organic-shape shadow-2xl"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-xl max-w-xs hidden md:block">
@@ -311,7 +331,7 @@ export default function HomePage() {
                 src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&fm=webp&q=80&w=1000" 
                 alt="Olivenbaum in Kreta" 
                 loading="lazy"
-                className="rounded-[40px] shadow-2xl hover:rotate-0 transition-transform duration-700 cursor-pointer"
+                className="organic-shape shadow-2xl hover:rotate-0 transition-transform duration-700 cursor-pointer"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -328,15 +348,18 @@ export default function HomePage() {
                 <motion.div 
                   animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-48 md:w-72"
+                  className="w-48 md:w-72 relative z-10"
                 >
                   <img 
                     src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&fm=webp&q=80&w=800" 
                     alt="Olivenöl Kanister" 
                     loading="lazy"
-                    className="drop-shadow-2xl"
+                    className="drop-shadow-2xl relative z-0"
                     referrerPolicy="no-referrer"
                   />
+                  <Hotspot top="30%" left="20%" title="Lichtgeschützt" desc="Dunkles 5L Design schützt perfekt vor UV-Strahlung und Oxidierung." />
+                  <Hotspot top="60%" left="70%" title="Premium Blend" desc="Kaltgepresst aus ausgewählten Bio-Oliven für den reinsten Geschmack." />
+                  <Hotspot top="80%" left="30%" title="Eco-Friendly" desc="Der Großkanister spart bis zu 60% Plastik im Vergleich zu kleinen Flaschen." />
                 </motion.div>
                 <div className="absolute top-10 left-10 w-12 h-12 bg-olive-400 rounded-full blur-xl opacity-50" />
                 <div className="absolute bottom-20 right-10 w-20 h-20 bg-olive-600 rounded-full blur-2xl opacity-30" />
