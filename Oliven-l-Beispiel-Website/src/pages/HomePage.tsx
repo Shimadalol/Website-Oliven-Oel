@@ -23,14 +23,20 @@ export default function HomePage() {
   const { addItem } = useCart();
 
   return (
-    <main className="grow">
+    <motion.main 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="grow"
+    >
       {/* Launch Offer Banner */}
-      <section className="bg-terracotta text-white py-3 px-6 text-center mt-[72px]">
+      <section className="bg-harvest-gold text-white py-3 px-6 text-center mt-[72px]">
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 flex-wrap">
           <Sparkles size={18} />
           <span className="font-bold text-sm tracking-wide uppercase">Launch-Angebot:</span>
           <span className="text-sm">50% Rabatt für die ersten 100 Kunden!</span>
-          <a href="#shop" className="ml-2 bg-white text-terracotta px-4 py-1 rounded-full text-xs font-bold hover:bg-white/90 transition-colors duration-200 cursor-pointer">
+          <a href="#shop" className="ml-2 bg-white text-harvest-gold px-4 py-1 rounded-full text-xs font-bold hover:bg-white/90 transition-colors duration-200 cursor-pointer shadow-sm">
             Jetzt sichern
           </a>
         </div>
@@ -43,8 +49,9 @@ export default function HomePage() {
             initial={{ scale: 1.05, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000"
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&fm=webp&q=80&w=2000"
             alt="Olivenhaine im Mittelmeerraum" 
+            loading="eager"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
@@ -72,7 +79,7 @@ export default function HomePage() {
               Doppelt laborgeprüft. Ohne Zwischenhändler.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#shop" className="bg-olive-600 hover:bg-olive-700 text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-all duration-300 transform hover:-translate-y-1 shadow-md hover:shadow-xl cursor-pointer">
+              <a href="#shop" className="bg-earth-green hover:bg-earth-green/90 text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-all duration-300 transform hover:-translate-y-1 shadow-md hover:shadow-xl cursor-pointer">
                 Testprobe anfordern <ArrowRight size={20} />
               </a>
               <Link to="/story" className="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer">
@@ -143,21 +150,22 @@ export default function HomePage() {
                   <img 
                     src={product.image} 
                     alt={product.name}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
                   {product.category === 'canister' && (
-                    <div className="absolute top-4 right-4 bg-terracotta text-white px-3 py-1 rounded-full text-xs font-bold">
+                    <div className="absolute top-4 right-4 bg-harvest-gold text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                       Bestseller
                     </div>
                   )}
                   {product.id === 'sample-50ml' && (
-                    <div className="absolute top-4 right-4 bg-olive-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                    <div className="absolute top-4 right-4 bg-earth-green text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                       Gratis
                     </div>
                   )}
                   {product.id === 'bundle-tasting' && (
-                    <div className="absolute top-4 right-4 bg-olive-800 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                    <div className="absolute top-4 right-4 bg-charcoal text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-sm">
                       <Gift size={12} /> Geschenkidee
                     </div>
                   )}
@@ -207,8 +215,9 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&q=80&w=1000" 
+                  src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&fm=webp&q=80&w=1000" 
                   alt="Olivenöl wird eingegossen" 
+                  loading="lazy"
                   className="rounded-[40px] shadow-2xl"
                   referrerPolicy="no-referrer"
                 />
@@ -250,9 +259,9 @@ export default function HomePage() {
                 <input 
                   type="email" 
                   placeholder="Deine E-Mail für die Warteliste"
-                  className="flex-1 px-6 py-4 rounded-full border border-olive-200 bg-white focus:outline-none focus:ring-2 focus:ring-olive-500 text-charcoal"
+                  className="flex-1 px-6 py-4 rounded-full border border-olive-200 bg-white focus:outline-none focus:ring-2 focus:ring-earth-green text-charcoal shadow-sm"
                 />
-                <button className="bg-terracotta hover:bg-terracotta/90 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 shadow-lg shadow-terracotta/20 hover:shadow-terracotta/40 hover:-translate-y-1 cursor-pointer">
+                <button className="bg-harvest-gold hover:bg-harvest-gold/90 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 shadow-lg shadow-harvest-gold/20 hover:shadow-harvest-gold/40 hover:-translate-y-1 cursor-pointer">
                   Benachrichtige mich
                 </button>
               </div>
@@ -299,8 +308,9 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, rotate: 3, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1000" 
+                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&fm=webp&q=80&w=1000" 
                 alt="Olivenbaum in Kreta" 
+                loading="lazy"
                 className="rounded-[40px] shadow-2xl hover:rotate-0 transition-transform duration-700 cursor-pointer"
                 referrerPolicy="no-referrer"
               />
@@ -321,8 +331,9 @@ export default function HomePage() {
                   className="w-48 md:w-72"
                 >
                   <img 
-                    src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800" 
+                    src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&fm=webp&q=80&w=800" 
                     alt="Olivenöl Kanister" 
+                    loading="lazy"
                     className="drop-shadow-2xl"
                     referrerPolicy="no-referrer"
                   />
@@ -420,6 +431,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

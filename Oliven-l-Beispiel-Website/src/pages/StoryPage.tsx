@@ -3,26 +3,32 @@ import { Heart, MapPin, Users, Sprout, ArrowRight, ChevronRight } from 'lucide-r
 import { Link } from 'react-router-dom';
 
 const FARMERS = [
-  { name: 'Familie Kydonakis', region: 'Chania, Kreta', country: 'Griechenland', specialty: 'Koroneiki-Oliven, frühe Ernte', since: 'Seit 4 Generationen', image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Familie Papadakis', region: 'Heraklion, Kreta', country: 'Griechenland', specialty: 'Bio-zertifiziert, Hochphenolisch', since: 'Seit 3 Generationen', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Familie Manolis', region: 'Rethymnon, Kreta', country: 'Griechenland', specialty: 'Kaltgepresst, sortenrein', since: 'Seit 5 Generationen', image: 'https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Familie Stavros', region: 'Sitia, Kreta', country: 'Griechenland', specialty: 'Tsounati-Oliven, mild-fruchtig', since: 'Seit 2 Generationen', image: 'https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Famiglia Rossi', region: 'Puglia', country: 'Italien', specialty: 'Coratina, intensiv-herbe Note', since: 'Seit 6 Generationen', image: 'https://images.unsplash.com/photo-1534710961216-75c88202f43e?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Famiglia Bianchi', region: 'Toskana', country: 'Italien', specialty: 'Frantoio-Blend, ausgewogen', since: 'Seit 3 Generationen', image: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=600' },
+  { name: 'Familie Kydonakis', region: 'Chania, Kreta', country: 'Griechenland', specialty: 'Koroneiki-Oliven, frühe Ernte', since: 'Seit 4 Generationen', image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&fm=webp&q=80&w=600' },
+  { name: 'Familie Papadakis', region: 'Heraklion, Kreta', country: 'Griechenland', specialty: 'Bio-zertifiziert, Hochphenolisch', since: 'Seit 3 Generationen', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&fm=webp&q=80&w=600' },
+  { name: 'Familie Manolis', region: 'Rethymnon, Kreta', country: 'Griechenland', specialty: 'Kaltgepresst, sortenrein', since: 'Seit 5 Generationen', image: 'https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&fm=webp&q=80&w=600' },
+  { name: 'Familie Stavros', region: 'Sitia, Kreta', country: 'Griechenland', specialty: 'Tsounati-Oliven, mild-fruchtig', since: 'Seit 2 Generationen', image: 'https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&fm=webp&q=80&w=600' },
+  { name: 'Famiglia Rossi', region: 'Puglia', country: 'Italien', specialty: 'Coratina, intensiv-herbe Note', since: 'Seit 6 Generationen', image: 'https://images.unsplash.com/photo-1534710961216-75c88202f43e?auto=format&fit=crop&fm=webp&q=80&w=600' },
+  { name: 'Famiglia Bianchi', region: 'Toskana', country: 'Italien', specialty: 'Frantoio-Blend, ausgewogen', since: 'Seit 3 Generationen', image: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&fm=webp&q=80&w=600' },
 ];
 
 export default function StoryPage() {
   return (
-    <main className="grow pt-20">
+    <motion.main 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="grow pt-20"
+    >
       {/* Hero */}
       <section className="py-24 bg-olive-50">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="text-terracotta font-bold uppercase tracking-widest text-sm mb-4 block">Unsere Geschichte</span>
+            <span className="text-harvest-gold font-bold uppercase tracking-widest text-sm mb-4 block">Unsere Geschichte</span>
             <h1 className="text-5xl md:text-6xl mb-8 leading-[1.1]">
               Warum wir das machen
             </h1>
-            <p className="text-xl text-olive-700 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-charcoal/80 leading-relaxed max-w-2xl mx-auto">
               Es geht nicht nur um Olivenöl. Es geht um Familien, Tradition und den Glauben, 
               dass gute Lebensmittel keine Kompromisse brauchen.
             </p>
@@ -35,10 +41,10 @@ export default function StoryPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="text-terracotta font-bold uppercase tracking-widest text-sm mb-4 block">Der Gründer</span>
+              <span className="text-harvest-gold font-bold uppercase tracking-widest text-sm mb-4 block">Der Gründer</span>
               <h2 className="text-4xl md:text-5xl mb-8">Besher</h2>
               
-              <div className="space-y-6 text-olive-700 leading-relaxed">
+              <div className="space-y-6 text-charcoal/80 leading-relaxed">
                 <p>
                   <strong className="text-charcoal">Besher ist in Syrien mit der Olivenölkultur aufgewachsen.</strong> Sein Vater hat sein ganzes Leben lang 
                   auf den Feldern gearbeitet. Olivenöl war nicht einfach ein Lebensmittel – es war Teil der Familie, 
@@ -77,14 +83,15 @@ export default function StoryPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&q=80&w=1000" 
+                src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&fm=webp&q=80&w=1000" 
                 alt="Olivenernte" 
+                loading="lazy"
                 className="rounded-[40px] shadow-2xl"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute -bottom-6 -left-6 bg-olive-600 text-white p-6 rounded-2xl shadow-xl hidden md:block">
+              <div className="absolute -bottom-6 -left-6 bg-earth-green text-white p-6 rounded-2xl shadow-xl hidden md:block">
                 <p className="font-bold text-lg">6 Partnerbauern</p>
-                <p className="text-sm text-olive-200">4 auf Kreta · 2 in Italien</p>
+                <p className="text-sm text-white/80">4 auf Kreta · 2 in Italien</p>
               </div>
             </div>
           </div>
@@ -165,6 +172,7 @@ export default function StoryPage() {
                   <img 
                     src={farmer.image} 
                     alt={farmer.name} 
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
@@ -188,14 +196,14 @@ export default function StoryPage() {
       <section className="py-24 bg-olive-100">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl mb-6">Probiere den Unterschied</h2>
-          <p className="text-olive-700 text-lg mb-10">
+          <p className="text-charcoal/80 text-lg mb-10">
             Bestelle jetzt eine kostenlose Testprobe und schmecke, was echtes Olivenöl ausmacht.
           </p>
-          <Link to="/#shop" className="inline-flex items-center gap-2 bg-olive-600 hover:bg-olive-700 text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer">
+          <Link to="/#shop" className="inline-flex items-center gap-2 bg-earth-green hover:bg-earth-green/90 text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer">
             Kostenlose Probe anfordern <ArrowRight size={22} />
           </Link>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

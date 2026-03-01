@@ -10,6 +10,11 @@ html {
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
+  --color-earth-green: #15803d;
+  --color-harvest-gold: #ca8a04;
+  --color-warm-white: #fafaf9;
+  --color-charcoal: #1c1917;
+
   --color-olive-50: #fdfbf7;
   --color-olive-100: #eceddf;
   --color-olive-200: #daddc2;
@@ -23,12 +28,11 @@ html {
   --color-olive-950: #1a200c;
 
   --color-terracotta: #e2725b;
-  --color-charcoal: #2d3436;
 }
 
 @layer base {
   body {
-    @apply bg-olive-50 text-charcoal font-sans antialiased selection:bg-olive-200 selection:text-olive-900;
+    @apply bg-warm-white text-charcoal font-sans antialiased selection:bg-earth-green/20 selection:text-charcoal;
   }
 
   h1,

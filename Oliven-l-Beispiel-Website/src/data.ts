@@ -10,7 +10,7 @@ export const PRODUCTS: Product[] = [
     unit: "l",
     size: "3L",
     image:
-      "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "canister",
   },
   {
@@ -22,7 +22,7 @@ export const PRODUCTS: Product[] = [
     unit: "l",
     size: "5L",
     image:
-      "https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "canister",
   },
   {
@@ -34,7 +34,7 @@ export const PRODUCTS: Product[] = [
     unit: "l",
     size: "3L",
     image:
-      "https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "canister",
   },
   {
@@ -46,7 +46,7 @@ export const PRODUCTS: Product[] = [
     unit: "ml",
     size: "50ml",
     image:
-      "https://images.unsplash.com/photo-1595991209266-5ff5a3a2f008?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1595991209266-5ff5a3a2f008?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "bottle",
   },
   {
@@ -58,7 +58,7 @@ export const PRODUCTS: Product[] = [
     unit: "ml",
     size: "500ml",
     image:
-      "https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "bottle",
   },
   {
@@ -70,7 +70,7 @@ export const PRODUCTS: Product[] = [
     unit: "Set",
     size: "3x 250ml",
     image:
-      "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "bundle",
   },
   {
@@ -82,7 +82,7 @@ export const PRODUCTS: Product[] = [
     unit: "l",
     size: "10L",
     image:
-      "https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "canister",
   },
 ];

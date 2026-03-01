@@ -1,4 +1,4 @@
-import { Droplets } from 'lucide-react';
+import { Droplets, CreditCard, ShieldCheck, Instagram, Facebook, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Footer() {
@@ -16,9 +16,15 @@ export function Footer() {
             Premium Olivenöl direkt vom Erzeuger aus dem Mittelmeerraum. Nachhaltig, fair und von höchster Güteklasse.
           </p>
           <div className="flex gap-4">
-            <div className="w-10 h-10 bg-white/5 rounded-full hover:bg-white/10 transition-colors cursor-pointer" />
-            <div className="w-10 h-10 bg-white/5 rounded-full hover:bg-white/10 transition-colors cursor-pointer" />
-            <div className="w-10 h-10 bg-white/5 rounded-full hover:bg-white/10 transition-colors cursor-pointer" />
+            <a href="#" className="w-10 h-10 bg-white/5 rounded-full hover:bg-harvest-gold hover:text-white transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm hover:-translate-y-1">
+              <Instagram size={18} />
+            </a>
+            <a href="#" className="w-10 h-10 bg-white/5 rounded-full hover:bg-harvest-gold hover:text-white transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm hover:-translate-y-1">
+              <Facebook size={18} />
+            </a>
+            <a href="#" className="w-10 h-10 bg-white/5 rounded-full hover:bg-harvest-gold hover:text-white transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm hover:-translate-y-1">
+              <Twitter size={18} />
+            </a>
           </div>
         </div>
 
@@ -50,12 +56,28 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 pt-20 mt-20 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-olive-500">
-        <p>© 2026 Olea Terra. Alle Rechte vorbehalten.</p>
-        <div className="flex gap-8">
-          <Link to="#" className="hover:text-white transition-colors">Impressum</Link>
-          <Link to="#" className="hover:text-white transition-colors">Datenschutz</Link>
-          <Link to="#" className="hover:text-white transition-colors">AGB</Link>
+      <div className="max-w-7xl mx-auto px-6 pt-16 mt-16 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-xs text-olive-400">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 order-2 md:order-1">
+          <p>© 2026 Olea Terra. Alle Rechte vorbehalten.</p>
+          <div className="flex gap-6">
+            <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
+            <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
+            <Link to="/agb" className="hover:text-white transition-colors">AGB</Link>
+          </div>
+        </div>
+        
+        {/* Logos area */}
+        <div className="flex flex-wrap justify-center gap-6 opacity-70 hover:opacity-100 transition-opacity duration-300 order-1 md:order-2">
+          <div className="flex items-center gap-2">
+            <ShieldCheck size={20} />
+            <span className="font-medium tracking-wide">Sichere Zahlung</span>
+          </div>
+          <div className="flex gap-3 text-white">
+            <div className="px-3 py-1 bg-white/10 rounded border border-white/20 font-bold flex items-center justify-center">PayPal</div>
+            <div className="px-3 py-1 bg-white/10 rounded border border-white/20 font-bold flex items-center justify-center">Visa</div>
+            <div className="px-3 py-1 bg-white/10 rounded border border-white/20 font-bold flex items-center justify-center">Mastercard</div>
+            <div className="px-3 py-1 bg-white/10 rounded border border-white/20 font-bold flex items-center justify-center">Klarna</div>
+          </div>
         </div>
       </div>
     </footer>
