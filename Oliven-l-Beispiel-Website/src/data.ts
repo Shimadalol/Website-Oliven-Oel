@@ -2,6 +2,18 @@ import { Product, Testimonial } from "./types";
 
 export const PRODUCTS: Product[] = [
   {
+    id: "pouch-3l-eco",
+    name: "Eco Nachfülltüte - 3 Liter",
+    description:
+      "Für die Umwelt und deinen Geldbeutel. Praktische Nachfülltüte mit 60% weniger Plastik als herkömmliche Kanister.",
+    price: 54.99,
+    unit: "l",
+    size: "3L",
+    image:
+      "https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?auto=format&fit=crop&fm=webp&q=80&w=800",
+    category: "canister",
+  },
+  {
     id: "can-3l-classic",
     name: "Natives Olivenöl Extra - 3 Liter",
     description:
@@ -26,18 +38,6 @@ export const PRODUCTS: Product[] = [
     category: "canister",
   },
   {
-    id: "pouch-3l-eco",
-    name: "Eco Nachfülltüte - 3 Liter",
-    description:
-      "Für die Umwelt und deinen Geldbeutel. Praktische Nachfülltüte mit 60% weniger Plastik als herkömmliche Kanister.",
-    price: 54.99,
-    unit: "l",
-    size: "3L",
-    image:
-      "https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?auto=format&fit=crop&fm=webp&q=80&w=800",
-    category: "canister",
-  },
-  {
     id: "sample-50ml",
     name: "Kostenlose Testprobe",
     description:
@@ -48,7 +48,6 @@ export const PRODUCTS: Product[] = [
     image:
       "https://images.unsplash.com/photo-1595991209266-5ff5a3a2f008?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "bottle",
-    stockLevel: 14,
   },
   {
     id: "bottle-500-premium",
@@ -73,7 +72,6 @@ export const PRODUCTS: Product[] = [
     image:
       "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "bundle",
-    stockLevel: 8,
   },
   {
     id: "can-10l-gastro",
@@ -86,7 +84,6 @@ export const PRODUCTS: Product[] = [
     image:
       "https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "canister",
-    stockLevel: 3,
   },
 ];
 
