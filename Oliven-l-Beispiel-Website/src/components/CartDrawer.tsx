@@ -52,21 +52,32 @@ export function CartDrawer() {
             {/* Items */}
             <div className="flex-1 overflow-y-auto p-6 bg-warm-white/50">
               {items.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                  <div className="w-24 h-24 bg-earth-green/10 rounded-full flex items-center justify-center mb-6">
-                    <ShoppingBag className="text-earth-green" size={40} />
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex flex-col items-center justify-center p-8 mt-12 text-center bg-olive-50 rounded-3xl border border-olive-100/50 shadow-sm"
+                >
+                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                    <ShoppingBag className="text-earth-green" size={32} />
                   </div>
-                  <p className="text-xl font-serif text-charcoal mb-2">Dein Warenkorb ist leer</p>
-                  <p className="text-sm text-charcoal/60">
-                    Entdecke unser Sortiment und füge dein erstes Produkt hinzu.
+                  <h3 className="text-2xl font-serif text-charcoal mb-3">Dein Warenkorb ist noch leer</h3>
+                  <p className="text-sm text-olive-600 mb-8 leading-relaxed max-w-[250px]">
+                    Entdecke unsere premium kaltgepressten Bio-Olivenöle und bringe den echten Geschmack des Mittelmeers in deine Küche.
                   </p>
                   <button
-                    onClick={closeCart}
-                    className="mt-8 bg-earth-green hover:bg-earth-green/90 text-white px-8 py-3 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-earth-green focus-visible:ring-offset-2"
+                    onClick={() => {
+                      closeCart();
+                      navigate('/');
+                      setTimeout(() => {
+                        const shopSection = document.getElementById('shop');
+                        if (shopSection) shopSection.scrollIntoView({ behavior: 'smooth' });
+                      }, 100);
+                    }}
+                    className="w-full bg-earth-green hover:bg-earth-green/90 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 shadow-lg shadow-earth-green/20 hover:-translate-y-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-earth-green"
                   >
-                    Weiter einkaufen
+                    Bestseller entdecken
                   </button>
-                </div>
+                </motion.div>
               ) : (
                 <div className="space-y-6">
                   {items.map((item) => (

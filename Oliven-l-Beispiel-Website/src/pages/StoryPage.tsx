@@ -5,6 +5,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const FARMERS = [
   {
@@ -72,6 +73,10 @@ export default function StoryPage() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="grow pt-20"
     >
+      <Helmet>
+        <title>Unsere Geschichte | Olea Terra</title>
+        <meta name="description" content="Erfahre mehr über Besher und warum wir kaltgepresstes Olivenöl ohne Umwege direkt von Familienbetrieben aus Kreta und Italien importieren." />
+      </Helmet>
       {/* Hero */}
       <section className="py-24 bg-olive-50">
         <div className="max-w-4xl mx-auto px-6 text-center">

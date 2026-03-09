@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, type ReactNode } from 'react';
 import type { Product } from '../types';
 
 export interface CartItem {
@@ -23,7 +23,23 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState<CartItem[]>(() => {
+    try {
+      const stored = localStorage.getItem('olea-terra-cart');
+      return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      console.error('Failed to parse cart local storage:', e);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('olea-terra-cart', JSON.stringify(items));
+    } catch (e) {
+      console.warn('Silent Failure Prevention: Failed to save cart to localStorage. User is likely in incognito mode or storage quota exceeded. The cart is now living solely in runtime memory.', e);
+    }
+  }, [items]);
   const [isOpen, setIsOpen] = useState(false);
 
   const addItem = useCallback((product: Product) => {

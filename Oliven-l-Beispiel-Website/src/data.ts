@@ -48,6 +48,7 @@ export const PRODUCTS: Product[] = [
     image:
       "https://images.unsplash.com/photo-1595991209266-5ff5a3a2f008?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "bottle",
+    stockLevel: 14,
   },
   {
     id: "bottle-500-premium",
@@ -72,6 +73,7 @@ export const PRODUCTS: Product[] = [
     image:
       "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "bundle",
+    stockLevel: 8,
   },
   {
     id: "can-10l-gastro",
@@ -84,6 +86,7 @@ export const PRODUCTS: Product[] = [
     image:
       "https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&fm=webp&q=80&w=800",
     category: "canister",
+    stockLevel: 3,
   },
 ];
 

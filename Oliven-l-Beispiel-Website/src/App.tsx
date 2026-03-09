@@ -5,6 +5,8 @@ import { Footer } from "./components/Footer";
 import { CartDrawer } from "./components/CartDrawer";
 import { CartProvider } from "./context/CartContext";
 import { lazy, Suspense, useEffect } from "react";
+import { HelmetProvider } from "react-helmet-async";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const StoryPage = lazy(() => import("./pages/StoryPage"));
@@ -75,10 +77,14 @@ function AppLayout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <CartProvider>
-        <AppLayout />
-      </CartProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <CartProvider>
+            <AppLayout />
+          </CartProvider>
+        </BrowserRouter>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }

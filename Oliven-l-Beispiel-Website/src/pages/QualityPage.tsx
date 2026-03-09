@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { ShieldCheck, FlaskConical, CheckCircle2, ArrowRight, FileText, Microscope, Leaf, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { useCart } from '../context/CartContext';
 
 const LAB_VALUES = [
   { name: 'Säuregehalt (Oleic)', value: '≤ 0.3%', benchmark: 'EU Grenzwert: 0.8%', status: 'excellent' },
@@ -12,8 +14,27 @@ const LAB_VALUES = [
 ];
 
 export default function QualityPage() {
+  const { addItem, openCart } = useCart();
+
+  const handleOrderSample = () => {
+    // Add the probierpaket (id: 1) to cart - price will need to be 0 or handled differently, assuming the product exists with price 0
+    addItem({
+      id: 'free_sample',
+      name: 'Olea Terra - Gratis Probe (50ml)',
+      price: 0,
+      size: '50ml',
+      image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&fm=webp&q=80&w=400',
+      description: 'Unsere kostenlose Testprobe.'
+    });
+    openCart();
+  };
+
   return (
     <main className="grow pt-20">
+      <Helmet>
+        <title>Labor & Qualität | Olea Terra</title>
+        <meta name="description" content="Null Kompromisse: Jede Charge unseres Olivenöls durchläuft eine strenge 2-Stufen-Laborprüfung nach EU-Normen." />
+      </Helmet>
       {/* Hero */}
       <section className="py-24 bg-olive-50">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -183,9 +204,12 @@ export default function QualityPage() {
           <p className="text-olive-700 text-lg mb-10">
             Bestelle eine kostenlose Testprobe und schmecke den Unterschied, den doppelte Qualitätskontrolle macht.
           </p>
-          <Link to="/#shop" className="inline-flex items-center gap-2 bg-olive-600 hover:bg-olive-700 text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer">
+          <button 
+            onClick={handleOrderSample} 
+            className="inline-flex items-center gap-2 bg-olive-600 hover:bg-olive-700 text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer"
+          >
             Gratis Probe bestellen <ArrowRight size={22} />
-          </Link>
+          </button>
         </div>
       </section>
     </main>

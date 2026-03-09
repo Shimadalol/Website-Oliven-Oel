@@ -1,5 +1,19 @@
 import { motion } from 'motion/react';
-import { Truck, Package, Users, ArrowRight, CheckCircle2, Mail, Phone, MapPin, Building2 } from 'lucide-react';
+import { Package, Users, ArrowRight, CheckCircle2, Mail, Phone, MapPin, Building2, Truck } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { useState } from 'react';
+
+const b2bSchema = z.object({
+  name: z.string().min(2, 'Bitte Namen eingeben'),
+  company: z.string().min(2, 'Bitte Firmennamen eingeben'),
+  email: z.string().email('Bitte gültige E-Mail eingeben'),
+  phone: z.string().min(5, 'Bitte Telefonnummer eingeben'),
+});
+
+type B2BFormData = z.infer<typeof b2bSchema>;
 
 
 const B2B_BENEFITS = [
@@ -12,8 +26,29 @@ const B2B_BENEFITS = [
 ];
 
 export default function B2BPage() {
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<B2BFormData>({
+    resolver: zodResolver(b2bSchema),
+    mode: 'onTouched',
+  });
+
+  const onSubmit = async (data: B2BFormData) => {
+    console.log('Valid B2B lead:', data);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsSuccess(true);
+  };
+
   return (
     <main className="grow pt-20">
+      <Helmet>
+        <title>Gastronomie (B2B) | Olea Terra</title>
+        <meta name="description" content="Premium Olivenöl für Profis. 10L Bag-in-Box Gebinde, direkte Lieferung ab Lager Frankfurt für die deutsche Gastronomie." />
+      </Helmet>
       {/* Hero */}
       <section className="py-24 bg-olive-950 text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -161,39 +196,91 @@ export default function B2BPage() {
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            <form className="lg:col-span-3 space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-bold mb-2">Name *</label>
-                  <input id="name" type="text" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
+            {isSuccess ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }} 
+                animate={{ opacity: 1, scale: 1 }} 
+                className="lg:col-span-3 bg-green-50 rounded-3xl p-12 text-center flex flex-col items-center justify-center border border-green-100"
+              >
+                <CheckCircle2 className="text-green-600 mb-6" size={64} />
+                <h3 className="text-2xl font-serif text-charcoal mb-4">Anfrage erfolgreich gesendet!</h3>
+                <p className="text-olive-700 leading-relaxed">
+                  Vielen Dank für Ihr Interesse an Olea Terra. <br />
+                  Wir haben Ihre Daten erhalten und werden uns innerhalb der nächsten 24 Stunden mit einem maßgeschneiderten Angebot bei Ihnen melden.
+                </p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-3 space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-bold mb-2">Name *</label>
+                    <input 
+                      {...register('name')}
+                      id="name" 
+                      type="text" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} bg-olive-50 focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-bold mb-2">Restaurant / Betrieb *</label>
+                    <input 
+                      {...register('company')}
+                      id="company" 
+                      type="text" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.company ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} bg-olive-50 focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.company && <p className="text-red-500 text-xs mt-1">{errors.company.message}</p>}
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-bold mb-2">E-Mail *</label>
+                    <input 
+                      {...register('email')}
+                      id="email" 
+                      type="email" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} bg-olive-50 focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-bold mb-2">Telefon *</label>
+                    <input 
+                      {...register('phone')}
+                      id="phone" 
+                      type="tel" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} bg-olive-50 focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                  </div>
                 </div>
                 <div>
-                  <label htmlFor="restaurant" className="block text-sm font-bold mb-2">Restaurant / Betrieb *</label>
-                  <input id="restaurant" type="text" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
+                  <label htmlFor="volume" className="block text-sm font-bold mb-2">Geschätztes monatliches Volumen</label>
+                  <select id="volume" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 cursor-pointer transition-shadow">
+                    <option>20-50 Liter</option>
+                    <option>50-100 Liter</option>
+                    <option>100-200 Liter</option>
+                    <option>200+ Liter</option>
+                  </select>
                 </div>
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-bold mb-2">E-Mail *</label>
-                <input id="email" type="email" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
-              </div>
-              <div>
-                <label htmlFor="volume" className="block text-sm font-bold mb-2">Geschätztes monatliches Volumen</label>
-                <select id="volume" className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 cursor-pointer transition-shadow">
-                  <option>20-50 Liter</option>
-                  <option>50-100 Liter</option>
-                  <option>100-200 Liter</option>
-                  <option>200+ Liter</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-bold mb-2">Nachricht</label>
-                <textarea id="message" rows={4} className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 resize-none transition-shadow" />
-              </div>
-              <button type="submit" className="w-full bg-olive-600 hover:bg-olive-700 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer flex items-center justify-center gap-2">
-                Anfrage absenden <ArrowRight size={20} />
-              </button>
-            </form>
-
+                <div>
+                  <label htmlFor="message" className="block text-sm font-bold mb-2">Nachricht</label>
+                  <textarea id="message" rows={4} className="w-full px-4 py-3 rounded-xl border border-olive-200 bg-olive-50 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 resize-none transition-shadow" />
+                </div>
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting || !isValid}
+                  className="w-full bg-olive-600 hover:bg-olive-700 disabled:bg-olive-300 disabled:cursor-not-allowed text-white px-8 py-4 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <span className="animate-pulse">Wird gesendet...</span>
+                  ) : (
+                    <>Anfrage absenden <ArrowRight size={20} /></>
+                  )}
+                </button>
+              </form>
+            )}
             <div className="lg:col-span-2 space-y-8">
               <div className="p-8 bg-olive-50 rounded-3xl border border-olive-100">
                 <h4 className="font-bold mb-6">Direktkontakt</h4>

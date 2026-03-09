@@ -3,25 +3,47 @@ import { motion } from 'motion/react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, ArrowLeft, ShieldCheck, Truck } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Helmet } from 'react-helmet-async';
+
+const checkoutSchema = z.object({
+  email: z.string().email('Bitte eine gültige E-Mail Adresse eingeben'),
+  firstName: z.string().min(2, 'Vorname muss mindestens 2 Zeichen lang sein'),
+  lastName: z.string().min(2, 'Nachname muss mindestens 2 Zeichen lang sein'),
+  address: z.string().min(5, 'Bitte eine vollständige Adresse eingeben'),
+  zip: z.string().min(5, 'Ungültige PLZ'),
+  city: z.string().min(2, 'Bitte eine Stadt eingeben'),
+  payment: z.enum(['creditcard', 'paypal', 'klarna']),
+});
+
+type CheckoutFormData = z.infer<typeof checkoutSchema>;
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<CheckoutFormData>({
+    resolver: zodResolver(checkoutSchema),
+    mode: 'onTouched', // Validates on blur
+    defaultValues: { payment: 'creditcard' },
+  });
 
   const shippingCost = totalPrice >= 50 ? 0 : 4.90;
   const finalTotal = totalPrice + shippingCost;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const onSubmit = async (data: CheckoutFormData) => {
+    console.log('Valid checkout data submitted:', data);
     // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      clearCart();
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsSuccess(true);
+    clearCart();
   };
 
   if (items.length === 0 && !isSuccess) {
@@ -75,6 +97,9 @@ export default function CheckoutPage() {
 
   return (
     <main className="grow pt-24 pb-24 bg-olive-50">
+      <Helmet>
+        <title>Sichere Kasse | Olea Terra</title>
+      </Helmet>
       <div className="max-w-7xl mx-auto px-6">
         <button 
           onClick={() => navigate(-1)}
@@ -88,59 +113,96 @@ export default function CheckoutPage() {
           <div className="lg:col-span-7 xl:col-span-8">
             <h1 className="text-4xl font-serif text-charcoal mb-8">Kasse</h1>
             
-            <form id="checkout-form" onSubmit={handleSubmit} className="space-y-8">
+            <form id="checkout-form" onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               {/* Kontaktinformationen */}
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-olive-100">
+              <div className="bg-white p-5 sm:p-8 rounded-3xl shadow-sm border border-olive-100">
                 <h2 className="text-xl font-serif font-bold text-charcoal mb-6">Kontaktinformationen</h2>
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-olive-700 mb-1">E-Mail Adresse *</label>
-                    <input required type="email" id="email" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" placeholder="max@beispiel.de" />
+                    <input 
+                      {...register('email')}
+                      type="email" 
+                      id="email" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} focus:outline-none focus:ring-1 transition-shadow`} 
+                      placeholder="max@beispiel.de" 
+                    />
+                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                   </div>
                 </div>
               </div>
 
               {/* Lieferadresse */}
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-olive-100">
+              <div className="bg-white p-5 sm:p-8 rounded-3xl shadow-sm border border-olive-100">
                 <h2 className="text-xl font-serif font-bold text-charcoal mb-6">Lieferadresse</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-olive-700 mb-1">Vorname *</label>
-                    <input required type="text" id="firstName" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
+                    <input 
+                      {...register('firstName')}
+                      type="text" 
+                      id="firstName" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.firstName ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>}
                   </div>
                   <div>
                     <label htmlFor="lastName" className="block text-sm font-medium text-olive-700 mb-1">Nachname *</label>
-                    <input required type="text" id="lastName" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
+                    <input 
+                      {...register('lastName')}
+                      type="text" 
+                      id="lastName" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.lastName ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>}
                   </div>
                   <div className="md:col-span-2">
                     <label htmlFor="address" className="block text-sm font-medium text-olive-700 mb-1">Straße & Hausnummer *</label>
-                    <input required type="text" id="address" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
+                    <input 
+                      {...register('address')}
+                      type="text" 
+                      id="address" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.address ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address.message}</p>}
                   </div>
                   <div>
                     <label htmlFor="zip" className="block text-sm font-medium text-olive-700 mb-1">Postleitzahl *</label>
-                    <input required type="text" id="zip" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
+                    <input 
+                      {...register('zip')}
+                      type="text" 
+                      id="zip" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.zip ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.zip && <p className="text-red-500 text-xs mt-1">{errors.zip.message}</p>}
                   </div>
                   <div>
                     <label htmlFor="city" className="block text-sm font-medium text-olive-700 mb-1">Stadt *</label>
-                    <input required type="text" id="city" className="w-full px-4 py-3 rounded-xl border border-olive-200 focus:outline-none focus:ring-1 focus:ring-olive-300 focus:border-olive-400 transition-shadow" />
+                    <input 
+                      {...register('city')}
+                      type="text" 
+                      id="city" 
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.city ? 'border-red-500 focus:ring-red-500' : 'border-olive-200 focus:ring-olive-300'} focus:outline-none focus:ring-1 transition-shadow`} 
+                    />
+                    {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>}
                   </div>
                 </div>
               </div>
 
-              {/* Zahlungsart (UI only) */}
+              {/* Zahlungsart */}
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-olive-100">
                 <h2 className="text-xl font-serif font-bold text-charcoal mb-6">Zahlung</h2>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3 p-4 border border-olive-200 rounded-xl cursor-pointer hover:bg-olive-50 transition-colors">
-                    <input type="radio" name="payment" className="w-4 h-4 text-olive-600" defaultChecked />
+                    <input {...register('payment')} type="radio" value="creditcard" className="w-4 h-4 text-olive-600" />
                     <span className="font-medium text-charcoal">Kreditkarte</span>
                   </label>
                   <label className="flex items-center gap-3 p-4 border border-olive-200 rounded-xl cursor-pointer hover:bg-olive-50 transition-colors">
-                    <input type="radio" name="payment" className="w-4 h-4 text-olive-600" />
+                    <input {...register('payment')} type="radio" value="paypal" className="w-4 h-4 text-olive-600" />
                     <span className="font-medium text-charcoal">PayPal</span>
                   </label>
                   <label className="flex items-center gap-3 p-4 border border-olive-200 rounded-xl cursor-pointer hover:bg-olive-50 transition-colors">
-                    <input type="radio" name="payment" className="w-4 h-4 text-olive-600" />
+                    <input {...register('payment')} type="radio" value="klarna" className="w-4 h-4 text-olive-600" />
                     <span className="font-medium text-charcoal">Rechnung (Klarna)</span>
                   </label>
                 </div>
@@ -194,8 +256,8 @@ export default function CheckoutPage() {
               <button 
                 type="submit"
                 form="checkout-form"
-                disabled={isSubmitting}
-                className="w-full bg-olive-600 hover:bg-olive-700 disabled:bg-olive-400 disabled:cursor-not-allowed text-white py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2"
+                disabled={isSubmitting || !isValid}
+                className="w-full bg-olive-600 hover:bg-olive-700 disabled:bg-olive-300 disabled:cursor-not-allowed text-white py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg cursor-pointer flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <span className="animate-pulse">Wird bearbeitet...</span>

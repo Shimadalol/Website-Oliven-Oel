@@ -8,6 +8,7 @@ export interface Product {
   image: string;
   category: 'canister' | 'bottle' | 'set' | 'bundle';
   isSubscriptionOnly?: boolean;
+  stockLevel?: number;
 }
 
 export interface Testimonial {
