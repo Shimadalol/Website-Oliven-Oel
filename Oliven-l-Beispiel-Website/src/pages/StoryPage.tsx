@@ -164,7 +164,9 @@ export default function StoryPage() {
                 src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&fm=webp&q=80&w=1000"
                 alt="Olivenernte"
                 loading="lazy"
-                className="organic-shape shadow-2xl"
+                width={1000}
+                height={667}
+                className="organic-shape shadow-2xl object-cover"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute -bottom-6 -left-6 bg-earth-green text-white p-6 rounded-2xl shadow-xl hidden md:block">

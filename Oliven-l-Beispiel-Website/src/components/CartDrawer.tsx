@@ -50,7 +50,7 @@ export function CartDrawer() {
             </div>
 
             {/* Items */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-6 bg-warm-white/50">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <div className="w-24 h-24 bg-earth-green/10 rounded-full flex items-center justify-center mb-6">
@@ -82,57 +82,62 @@ export function CartDrawer() {
                       <img
                         src={item.product.image}
                         alt={item.product.name}
-                        className="w-20 h-20 object-cover rounded-xl"
+                        className="w-20 h-20 object-cover rounded-xl shrink-0"
                         referrerPolicy="no-referrer"
                       />
 
-                      {/* Product Details */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-charcoal text-sm truncate">
-                          {item.product.name}
-                        </h3>
-                        <p className="text-xs text-olive-500 mt-0.5">{item.product.size}</p>
-
-                        <div className="flex items-center justify-between mt-3">
-                          {/* Quantity Controls */}
-                          <div className="flex items-center gap-2 bg-white/50 backdrop-blur-sm rounded-full border border-black/5 px-1 shadow-sm">
-                            <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                              className="p-1.5 hover:bg-white rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-earth-green"
-                            >
-                              <Minus size={14} className="text-earth-green" />
-                            </button>
-                            <span className="text-sm font-bold text-charcoal w-6 text-center">
-                              {item.quantity}
-                            </span>
-                            <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                              className="p-1.5 hover:bg-white rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-earth-green"
-                            >
-                              <Plus size={14} className="text-earth-green" />
-                            </button>
+                      {/* Product Details Area */}
+                      <div className="flex flex-1 gap-2">
+                        <div className="flex-1 min-w-0 flex flex-col justify-between">
+                          <div>
+                            <h3 className="font-bold text-charcoal text-sm truncate">
+                              {item.product.name}
+                            </h3>
+                            <p className="text-xs text-olive-500 mt-0.5">{item.product.size}</p>
                           </div>
 
-                          {/* Price */}
-                          <div className="text-right">
+                          <div className="flex items-center gap-2 mt-auto">
+                            {/* Quantity Controls */}
+                            <div className="flex items-center gap-2 bg-white/50 backdrop-blur-sm rounded-full border border-black/5 px-1 shadow-sm">
+                              <button
+                                onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                                className="p-1.5 hover:bg-white rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-earth-green"
+                              >
+                                <Minus size={14} className="text-earth-green" />
+                              </button>
+                              <span className="text-sm font-bold text-charcoal w-6 text-center">
+                                {item.quantity}
+                              </span>
+                              <button
+                                onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                                className="p-1.5 hover:bg-white rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-earth-green"
+                              >
+                                <Plus size={14} className="text-earth-green" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Price and Delete Container */}
+                        <div className="flex flex-col items-end justify-between shrink-0">
+                          <button
+                            onClick={() => removeItem(item.product.id)}
+                            className="p-1.5 hover:bg-red-50 rounded-full transition-colors duration-200 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                          >
+                            <Trash2 size={16} className="text-charcoal/40 group-hover:text-red-500 transition-colors duration-200" />
+                          </button>
+
+                          <div className="text-right mt-auto">
                             {item.product.price === 0 ? (
-                              <span className="font-bold text-harvest-gold">Gratis</span>
+                              <span className="font-bold text-harvest-gold block mt-2">Gratis</span>
                             ) : (
-                              <span className="font-bold text-charcoal">
+                              <span className="font-bold text-charcoal block mt-2">
                                 {(item.product.price * item.quantity).toFixed(2)}€
                               </span>
                             )}
                           </div>
                         </div>
                       </div>
-
-                      {/* Delete Button */}
-                      <button
-                        onClick={() => removeItem(item.product.id)}
-                        className="self-start p-1.5 hover:bg-red-50 rounded-full transition-colors duration-200 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
-                      >
-                        <Trash2 size={16} className="text-charcoal/40 group-hover:text-red-500 transition-colors duration-200" />
-                      </button>
                     </motion.div>
                   ))}
                 </div>

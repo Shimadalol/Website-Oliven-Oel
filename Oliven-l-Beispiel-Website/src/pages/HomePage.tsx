@@ -44,7 +44,7 @@ export default function HomePage() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 1, ease: "easeInOut" }}
       className="grow"
     >
       {/* Launch Offer Banner */}
@@ -68,10 +68,11 @@ export default function HomePage() {
           <motion.img 
             initial={{ scale: 1.05, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
             src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&fm=webp&q=80&w=2000"
             alt="Olivenhaine im Mittelmeerraum" 
             loading="eager"
+            fetchPriority="high"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
@@ -234,11 +235,13 @@ export default function HomePage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  transition={{ duration: 1.2, ease: "easeInOut" }}
                   src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&fm=webp&q=80&w=1000" 
                   alt="Olivenöl wird eingegossen" 
                   loading="lazy"
-                  className="organic-shape shadow-2xl"
+                  width={1000}
+                  height={667}
+                  className="organic-shape shadow-2xl object-cover"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-xl max-w-xs hidden md:block">
@@ -327,11 +330,13 @@ export default function HomePage() {
                 initial={{ opacity: 0, rotate: 10, scale: 0.95 }}
                 whileInView={{ opacity: 1, rotate: 3, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 1, ease: "easeOut" }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
                 src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&fm=webp&q=80&w=1000" 
                 alt="Olivenbaum in Kreta" 
                 loading="lazy"
-                className="organic-shape shadow-2xl hover:rotate-0 transition-transform duration-700 cursor-pointer"
+                width={1000}
+                height={667}
+                className="organic-shape shadow-2xl transition-transform duration-1000 ease-in-out cursor-pointer object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -346,8 +351,8 @@ export default function HomePage() {
             <div className="relative flex justify-center">
               <div className="w-80 h-80 md:w-[500px] md:h-[500px] bg-olive-500/20 rounded-full flex items-center justify-center relative">
                 <motion.div 
-                  animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="w-48 md:w-72 relative z-10"
                 >
                   <img 
