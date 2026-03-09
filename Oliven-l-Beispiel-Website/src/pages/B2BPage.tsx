@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Truck, Package, Users, ArrowRight, CheckCircle2, Mail, Phone, MapPin, Building2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+
 
 const B2B_BENEFITS = [
   'Staffelpreise ab 20 Liter Bestellvolumen',
@@ -90,12 +90,12 @@ export default function B2BPage() {
           <h2 className="text-4xl md:text-5xl mb-16 text-center">Gastro-Konditionen</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-10 bg-white rounded-3xl border border-olive-100 shadow-sm">
+            <div className="flex flex-col p-10 bg-white rounded-3xl border border-olive-100 shadow-sm">
               <h3 className="text-2xl mb-2">Starter</h3>
               <p className="text-sm text-olive-500 mb-6">Für kleine Restaurants & Cafés</p>
               <p className="text-4xl font-bold text-charcoal mb-1">20-50L</p>
               <p className="text-sm text-olive-500 mb-8">pro Bestellung</p>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 grow">
                 {['Staffelpreis ab 20L', 'Freie Gebindewahl', 'Monatliche Lieferung'].map((f, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm">
                     <CheckCircle2 size={16} className="text-olive-600" />
@@ -103,12 +103,12 @@ export default function B2BPage() {
                   </li>
                 ))}
               </ul>
-              <a href="#kontakt" className="block text-center bg-olive-100 hover:bg-olive-200 text-charcoal px-6 py-4 rounded-full font-bold transition-colors duration-200 cursor-pointer">
+              <a href="#kontakt" className="block text-center bg-olive-100 hover:bg-olive-200 text-charcoal px-6 py-4 rounded-full font-bold transition-colors duration-200 cursor-pointer mt-auto">
                 Angebot anfragen
               </a>
             </div>
 
-            <div className="p-10 bg-olive-900 text-white rounded-3xl shadow-xl relative">
+            <div className="flex flex-col p-10 bg-olive-900 text-white rounded-3xl shadow-xl relative">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-terracotta text-white px-4 py-1 rounded-full text-xs font-bold">
                 Beliebt
               </div>
@@ -116,7 +116,7 @@ export default function B2BPage() {
               <p className="text-sm text-olive-300 mb-6">Für mittlere Gastro-Betriebe</p>
               <p className="text-4xl font-bold mb-1">50-200L</p>
               <p className="text-sm text-olive-400 mb-8">pro Bestellung</p>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 grow">
                 {['Bester Literpeis', 'Individuelle Lieferrhythmen', 'Persönlicher Ansprechpartner', 'Degustationsproben'].map((f, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm">
                     <CheckCircle2 size={16} className="text-olive-400" />
@@ -124,17 +124,17 @@ export default function B2BPage() {
                   </li>
                 ))}
               </ul>
-              <a href="#kontakt" className="block text-center bg-terracotta hover:bg-terracotta/90 text-white px-6 py-4 rounded-full font-bold transition-colors duration-200 cursor-pointer">
+              <a href="#kontakt" className="block text-center bg-terracotta hover:bg-terracotta/90 text-white px-6 py-4 rounded-full font-bold transition-colors duration-200 cursor-pointer mt-auto">
                 Angebot anfragen
               </a>
             </div>
 
-            <div className="p-10 bg-white rounded-3xl border border-olive-100 shadow-sm">
+            <div className="flex flex-col p-10 bg-white rounded-3xl border border-olive-100 shadow-sm">
               <h3 className="text-2xl mb-2">Enterprise</h3>
               <p className="text-sm text-olive-500 mb-6">Für Großabnehmer & Ketten</p>
               <p className="text-4xl font-bold text-charcoal mb-1">200L+</p>
               <p className="text-sm text-olive-500 mb-8">pro Bestellung</p>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 grow">
                 {['Individuelle Verhandlung', 'White-Label möglich', 'Langfristiger Rahmenvertrag', 'HACCP-Dokumentation'].map((f, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm">
                     <CheckCircle2 size={16} className="text-olive-600" />
@@ -142,7 +142,7 @@ export default function B2BPage() {
                   </li>
                 ))}
               </ul>
-              <a href="#kontakt" className="block text-center bg-olive-100 hover:bg-olive-200 text-charcoal px-6 py-4 rounded-full font-bold transition-colors duration-200 cursor-pointer">
+              <a href="#kontakt" className="block text-center bg-olive-100 hover:bg-olive-200 text-charcoal px-6 py-4 rounded-full font-bold transition-colors duration-200 cursor-pointer mt-auto">
                 Kontakt aufnehmen
               </a>
             </div>

@@ -99,11 +99,6 @@ export default function QualityPage() {
               </ul>
             </motion.div>
           </div>
-
-          <div className="mt-12 p-8 bg-olive-900 text-white rounded-3xl text-center">
-            <p className="text-lg font-bold mb-2">Kosten pro Labortest: ca. 150€ pro Charge</p>
-            <p className="text-olive-300 text-sm">Wir investieren in doppelte Tests, damit du sicher sein kannst: Was draufsteht, ist auch drin.</p>
-          </div>
         </div>
       </section>
 

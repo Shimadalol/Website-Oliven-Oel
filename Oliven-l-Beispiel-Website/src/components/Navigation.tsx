@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingBag, Menu, X, Droplets } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
@@ -11,13 +11,6 @@ export function Navigation() {
   const location = useLocation();
   const { totalItems, toggleCart } = useCart();
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -28,10 +21,6 @@ export function Navigation() {
 
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-harvest-gold origin-left z-60"
-        style={{ scaleX }}
-      />
       <nav className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4",
         scrolled ? "bg-warm-white/80 backdrop-blur-xl border-b border-white/20 shadow-sm py-3" : "bg-transparent"
