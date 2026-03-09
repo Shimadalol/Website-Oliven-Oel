@@ -16,6 +16,8 @@ const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
 const ImpressumPage = lazy(() => import("./pages/ImpressumPage"));
 const DatenschutzPage = lazy(() => import("./pages/DatenschutzPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
+const ProductPage = lazy(() => import("./pages/ProductPage"));
+const SuccessPage = lazy(() => import("./pages/SuccessPage"));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -66,6 +68,8 @@ function AppLayout() {
               <Route path="/impressum" element={<ImpressumPage />} />
               <Route path="/datenschutz" element={<DatenschutzPage />} />
               <Route path="/agb" element={<TermsPage />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/checkout/success" element={<SuccessPage />} />
             </Routes>
           </Suspense>
         </motion.div>

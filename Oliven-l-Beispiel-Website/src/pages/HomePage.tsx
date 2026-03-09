@@ -165,6 +165,7 @@ export default function HomePage() {
                 viewport={{ once: true, margin: "-50px" }}
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
+                onClick={() => navigate(`/product/${product.id}`)}
                 className="group bg-olive-50 rounded-3xl overflow-hidden border border-olive-100 flex flex-col h-full cursor-pointer"
               >
                 <div className="aspect-square overflow-hidden relative">
@@ -455,6 +456,50 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* FAQ Section */}
+      <section className="py-24 bg-olive-50">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl mb-4 font-serif">Häufig gestellte Fragen</h2>
+            <p className="text-olive-600">Alles, was du über unser Premium-Olivenöl wissen musst.</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              {
+                q: "Wie lagere ich mein Olivenöl am besten?",
+                a: "Olivenöl liebt es dunkel und kühl (ideal sind 14-18°C), aber nicht im Kühlschrank. Licht und Sauerstoff sind die größten Feinde der Qualität. Unsere Kanister schützen das Öl perfekt vor UV-Strahlung."
+              },
+              {
+                q: "Kann ich mit eurem Olivenöl auch braten?",
+                a: "Ja, absolut! Unser natives Olivenöl extra ist bis ca. 190°C hitzestabil. Es eignet sich hervorragend zum Braten, Dünsten und Backen. Lediglich zum scharfen Anfeuern (Deep-Frying) empfehlen wir es aufgrund der feinen Aromen nicht."
+              },
+              {
+                q: "Was bedeutet 'kaltgepresst'?",
+                a: "Kaltgepresst bedeutet, dass die Temperatur während der gesamten Extraktion nie über 27°C gestiegen ist. Nur so bleiben die wertvollen Vitamine, Antioxidantien und das volle Aroma erhalten."
+              },
+              {
+                q: "Warum ist mein Öl im Winter manchmal trüb oder flockig?",
+                a: "Keine Sorge, das ist ein natürlicher Prozess! Olivenöl beginnt bei Temperaturen unter 7°C zu flokkulieren (fest zu werden). Bei Zimmertemperatur wird es schnell wieder klar – die Qualität bleibt dabei voll erhalten."
+              },
+              {
+                q: "Woher genau kommt das Öl?",
+                a: "Wir beziehen unser Öl ohne Umwege direkt von festen Partnerbauern. Unsere Hauptquellen liegen in der Region Messenien auf der Peloponnes (Griechenland) sowie in Apulien (Italien)."
+              }
+            ].map((faq, i) => (
+              <details key={i} className="group bg-white rounded-2xl border border-olive-100 open:shadow-md transition-all">
+                <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                  <span className="font-bold text-charcoal">{faq.q}</span>
+                  <ChevronRight size={20} className="text-olive-400 group-open:rotate-90 transition-transform" />
+                </summary>
+                <div className="px-6 pb-6 text-olive-700 leading-relaxed text-sm">
+                  {faq.a}
+                </div>
+              </details>
             ))}
           </div>
         </div>

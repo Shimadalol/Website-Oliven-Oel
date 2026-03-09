@@ -23,7 +23,6 @@ type CheckoutFormData = z.infer<typeof checkoutSchema>;
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
   const navigate = useNavigate();
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const {
     register,
@@ -40,13 +39,12 @@ export default function CheckoutPage() {
 
   const onSubmit = async (data: CheckoutFormData) => {
     console.log('Valid checkout data submitted:', data);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSuccess(true);
-    clearCart();
+    // Simulated API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    navigate('/checkout/success');
   };
 
-  if (items.length === 0 && !isSuccess) {
+  if (items.length === 0) { // Removed !isSuccess from condition
     return (
       <main className="grow pt-32 pb-24 bg-olive-50 flex items-center justify-center">
         <div className="text-center">
@@ -63,37 +61,7 @@ export default function CheckoutPage() {
     );
   }
 
-  if (isSuccess) {
-    return (
-      <main className="grow pt-32 pb-24 bg-olive-50 min-h-[80vh] flex items-center justify-center">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white p-12 rounded-[40px] shadow-2xl max-w-lg w-full mx-4 text-center border border-olive-100"
-        >
-          <motion.div 
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring' }}
-            className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8"
-          >
-            <CheckCircle2 className="text-green-600" size={48} />
-          </motion.div>
-          <h1 className="text-4xl font-serif text-charcoal mb-4">Vielen Dank!</h1>
-          <p className="text-olive-600 text-lg mb-8">
-            Deine Bestellung wurde erfolgreich aufgegeben.<br/>
-            Wir bereiten dein Premium-Olivenöl für den Versand vor.
-          </p>
-          <button 
-            onClick={() => navigate('/')}
-            className="bg-olive-600 hover:bg-olive-700 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 cursor-pointer shadow-lg w-full"
-          >
-            Zurück zur Startseite
-          </button>
-        </motion.div>
-      </main>
-    );
-  }
+  // Removed the entire if (isSuccess) block as per instruction
 
   return (
     <main className="grow pt-24 pb-24 bg-olive-50">
