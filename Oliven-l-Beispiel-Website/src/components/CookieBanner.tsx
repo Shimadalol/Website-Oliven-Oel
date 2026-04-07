@@ -33,7 +33,7 @@ export function CookieBanner() {
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-xl"
         >
-          <div className="bg-olive-950 text-olive-100 rounded-2xl shadow-2xl px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 border border-white/10">
+          <div className="relative bg-olive-950 text-olive-100 rounded-2xl shadow-2xl px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 border border-white/10">
             <Cookie size={24} className="text-harvest-gold shrink-0 mt-0.5 sm:mt-0" />
             <p className="text-sm leading-relaxed grow">
               Wir verwenden Cookies, um die Website-Erfahrung zu verbessern.{' '}

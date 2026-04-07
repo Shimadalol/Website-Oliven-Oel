@@ -11,81 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-
-const FARMERS = [
-  {
-    id: "kydonakis",
-    name: "Familie Kydonakis",
-    region: "Chania, Kreta",
-    country: "Griechenland",
-    specialty: "Koroneiki-Oliven, frühe Ernte",
-    since: "Seit 4 Generationen",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&fm=webp&q=80&w=600",
-    fullStory: "Die Familie Kydonakis bewirtschaftet ihre Haine im Schatten der Weißen Berge (Lefka Ori). Ihr Geheimnis ist der kalkhaltige Boden und die kühle Brise des Libyschen Meeres. Jeder Baum wird von Hand gepflegt, als wäre er ein Familienmitglied.",
-    fields: ["Hain am Silberhang", "Tal der alten Stämme", "Küsten-Terrassen"],
-    tradition: "Kaltpressung innerhalb von 2 Stunden nach der Ernte."
-  },
-  {
-    id: "papadakis",
-    name: "Familie Papadakis",
-    region: "Heraklion, Kreta",
-    country: "Griechenland",
-    specialty: "Bio-zertifiziert, Hochphenolisch",
-    since: "Seit 3 Generationen",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&fm=webp&q=80&w=600",
-    fullStory: "Papadakis war einer der Pioniere des ökologischen Landbaus auf Kreta. Für sie ist das Olivenöl ein Heilmittel. Ihr Öl zeichnet sich durch einen extrem hohen Gehalt an Antioxidantien aus.",
-    fields: ["Sonnen-Plateau", "Bio-Garten West", "Fels-Reservat"],
-    tradition: "Verwendung von natürlichen Kompost aus eigenen Schafbeständen."
-  },
-  {
-    id: "manolis",
-    name: "Familie Manolis",
-    region: "Rethymnon, Kreta",
-    country: "Griechenland",
-    specialty: "Kaltgepresst, sortenrein",
-    since: "Seit 5 Generationen",
-    image: "https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&fm=webp&q=80&w=600",
-    fullStory: "Die Manolis-Brüder führen die Tradition ihres Urgroßvaters fort. Sie setzen auf maximale Reinheit und lehnen jede Form von Misch-Ölen kategorisch ab.",
-    fields: ["Zentraler Hain", "Süd-Hügel", "Bachlauf-Parzelle"],
-    tradition: "Traditionelle Steinmühlen-Initialpressung für maximale Aromatik."
-  },
-  {
-    id: "stavros",
-    name: "Familie Stavros",
-    region: "Sitia, Kreta",
-    country: "Griechenland",
-    specialty: "Tsounati-Oliven, mild-fruchtig",
-    since: "Seit 2 Generationen",
-    image: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&fm=webp&q=80&w=600",
-    fullStory: "Im Osten Kretas, wo die Sonne am längsten scheint, konzentriert sich Stavros auf die seltene Tsounati-Sorte. Ein Öl für Kenner, die sanfte Noten lieben.",
-    fields: ["Morgenröte-Feld", "Sandstein-Hügel"],
-    tradition: "Ernte ausschließlich bei Neumond für optimale Saftkonzentration."
-  },
-  {
-    id: "rossi",
-    name: "Famiglia Rossi",
-    region: "Puglia",
-    country: "Italien",
-    specialty: "Coratina, intensiv-herbe Note",
-    since: "Seit 6 Generationen",
-    image: "https://images.unsplash.com/photo-1534710961216-75c88202f43e?auto=format&fit=crop&fm=webp&q=80&w=600",
-    fullStory: "Die Rossis aus Apulien sind bekannt für ihr kraftvolles Öl. Ihre Coratina-Bäume sind zum Teil über 400 Jahre alt und liefern ein Öl mit Charakter und Biss.",
-    fields: ["Uralter Olivenhain", "Tal der Stille", "Rote Erde"],
-    tradition: "Schonende Lagerung in traditionellen Terrakotta-Amphoren."
-  },
-  {
-    id: "bianchi",
-    name: "Famiglia Bianchi",
-    region: "Toskana",
-    country: "Italien",
-    specialty: "Frantoio-Blend, ausgewogen",
-    since: "Seit 3 Generationen",
-    image: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&fm=webp&q=80&w=600",
-    fullStory: "In den Hügeln der Toskana kreieren die Bianchis eine Komposition aus verschiedenen Sorten. Das Ergebnis ist ein perfekt ausbalanciertes Öl, das zu jedem Gericht passt.",
-    fields: ["Zypressen-Hang", "Marmor-Blick", "Villa-Garten"],
-    tradition: "Sensorische Analyse jeder einzelnen Flaschenfüllung durch den Familienrat."
-  },
-];
+import { FARMERS, TEXTS } from "../data";
 
 export default function StoryPage() {
   const [selectedFarmer, setSelectedFarmer] = useState<typeof FARMERS[0] | null>(null);
@@ -112,14 +38,13 @@ export default function StoryPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-harvest-gold font-bold uppercase tracking-widest text-sm mb-4 block">
-              Unsere Geschichte
+              {TEXTS.story.hero.tagline}
             </span>
             <h1 className="text-5xl md:text-6xl mb-8 leading-[1.1]">
-              Warum wir das machen
+              {TEXTS.story.hero.headline}
             </h1>
             <p className="text-xl text-charcoal/80 leading-relaxed max-w-2xl mx-auto">
-              Es geht nicht nur um Olivenöl. Es geht um Familien, Tradition und
-              den Glauben, dass gute Lebensmittel keine Kompromisse brauchen.
+              {TEXTS.story.hero.subtext}
             </p>
           </motion.div>
         </div>
@@ -131,33 +56,20 @@ export default function StoryPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-harvest-gold font-bold uppercase tracking-widest text-sm mb-4 block">
-                Der Gründer
+                {TEXTS.story.besher.tagline}
               </span>
-              <h2 className="text-4xl md:text-5xl mb-8">Besher</h2>
+              <h2 className="text-4xl md:text-5xl mb-8">{TEXTS.story.besher.headline}</h2>
 
               <div className="space-y-6 text-charcoal/80 leading-relaxed">
-                <p>
-                  <strong className="text-charcoal">
-                    Besher ist in Syrien mit der Olivenölkultur aufgewachsen.
-                  </strong>{" "}
-                  Sein Vater hat sein ganzes Leben lang auf den Feldern
-                  gearbeitet. Olivenöl was nicht einfach ein Lebensmittel – es
-                  war Teil der Familie, Teil der Identität.
-                </p>
-                <p>
-                  In Deutschland angekommen, machte er eine ernüchternde Erfahrung:
-                  <strong className="text-charcoal">
-                    {" "}Das Supermarkt-Öl hatte keine Seele.
-                  </strong>
-                  Keine Frische, keine echte Herkunft. Also beschloss er, die Brücke direkt zu den Bauern zu schlagen.
-                </p>
+                <p>{TEXTS.story.besher.paragraph1}</p>
+                <p>{TEXTS.story.besher.paragraph2}</p>
 
                 <div className="my-8 p-8 bg-olive-50 rounded-3xl border border-olive-100">
                   <h4 className="font-serif text-xl text-charcoal mb-4 italic">
-                    "Direktimport ohne Umwege."
+                    "{TEXTS.story.besher.quote}"
                   </h4>
                   <p className="text-sm text-olive-600">
-                    Durch den Import in großen Mengen (4.000 Liter) direkt ab Feld und die Lagerung in Frankfurt senken wir Kosten und CO2-Abdruck massiv – zum Vorteil für Bauern und Kunden.
+                    {TEXTS.story.besher.quoteSubtext}
                   </p>
                 </div>
               </div>
@@ -168,8 +80,8 @@ export default function StoryPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?auto=format&fit=crop&fm=webp&q=80&w=1000"
-                alt="Besher's Story"
+                src={TEXTS.story.besher.image}
+                alt={TEXTS.story.besher.headline}
                 className="organic-shape shadow-2xl object-cover"
               />
             </div>
@@ -182,13 +94,13 @@ export default function StoryPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <span className="text-terracotta font-bold uppercase tracking-widest text-sm mb-4 block">
-              Unsere Partner
+              {TEXTS.story.farmers.tagline}
             </span>
             <h2 className="text-4xl md:text-5xl mb-4">
-              Die Familien hinter dem Öl
+              {TEXTS.story.farmers.headline}
             </h2>
             <p className="text-olive-600 max-w-2xl mx-auto">
-              Klicken Sie auf eine Familie, um ihre Geschichte und die Felder zu sehen, auf denen unser Gold wächst.
+              {TEXTS.story.farmers.subtext}
             </p>
           </div>
 
@@ -303,15 +215,15 @@ export default function StoryPage() {
       {/* CTA */}
       <section className="py-24 bg-olive-100">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl mb-6">Probiere den Unterschied</h2>
+          <h2 className="text-4xl md:text-5xl mb-6">{TEXTS.story.cta.headline}</h2>
           <p className="text-charcoal/80 text-lg mb-10">
-            Hinter jeder Flasche steht ein Gesicht, eine Familie und eine Geschichte.
+            {TEXTS.story.cta.subtext}
           </p>
           <Link
             to="/#shop"
             className="inline-flex items-center gap-2 bg-earth-green hover:bg-earth-green/90 text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer"
           >
-            Jetzt bestellen <ArrowRight size={22} />
+            {TEXTS.story.cta.ctaText} <ArrowRight size={22} />
           </Link>
         </div>
       </section>

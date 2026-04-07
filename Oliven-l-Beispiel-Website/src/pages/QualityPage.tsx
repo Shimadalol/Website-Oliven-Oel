@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { TEXTS } from "../data";
 import { useCart } from "../context/CartContext";
 
 const LAB_VALUES = [
@@ -87,18 +88,15 @@ export default function QualityPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-terracotta font-bold uppercase tracking-widest text-sm mb-4 block">
-              Qualität & Transparenz
+              {TEXTS.quality.hero.tagline}
             </span>
             <h1 className="text-5xl md:text-6xl mb-8 leading-[1.1]">
-              Doppelt geprüft.
+              {TEXTS.quality.hero.headline}
               <br />
-              <span className="italic text-olive-600">Null Kompromisse.</span>
+              <span className="italic text-olive-600">{TEXTS.quality.hero.headlineItalic}</span>
             </h1>
             <p className="text-xl text-olive-700 leading-relaxed max-w-2xl mx-auto">
-              Unser größter Anspruch ist gleichzeitig unser größter USP: Jede
-              einzelne Charge wird
-              <strong> zweimal im Labor getestet</strong> – einmal im
-              Ursprungsland und einmal bei Ankunft in Deutschland.
+              {TEXTS.quality.hero.subtext}
             </p>
           </motion.div>
         </div>
@@ -113,11 +111,9 @@ export default function QualityPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl mb-6">Die 2-Phasen Analyse</h2>
+            <h2 className="text-4xl md:text-5xl mb-6">{TEXTS.quality.analysis.headline}</h2>
             <p className="text-olive-700 max-w-2xl mx-auto text-lg">
-              Maximale Transparenz durch lückenlose Kontrolle. Wir dokumentieren
-              den Zustand unseres Öls direkt am Ursprung und erneut bei Ankunft
-              in Deutschland.
+              {TEXTS.quality.analysis.subtext}
             </p>
           </motion.div>
 
@@ -373,28 +369,10 @@ export default function QualityPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: Leaf,
-                title: "Ernte & Pressung",
-                desc: "Innerhalb von 4h nach der Ernte kaltgepresst. Unter 27°C. Erste Pressung.",
-              },
-              {
-                icon: FlaskConical,
-                title: "1. Labortest",
-                desc: "Im Ursprungsland: Säure, Reinheit, Pestizide. Nur zugelassene Chargen werden verschifft.",
-              },
-              {
-                icon: Truck,
-                title: "Transport & Lagerung",
-                desc: "4.000 Liter pro Lieferung nach Frankfurt. Stickstoff-geschützte Lagerung für maximale Frische.",
-              },
-              {
-                icon: Microscope,
-                title: "2. Labortest",
-                desc: "In Deutschland: Vollanalyse wiederholt. Vergleich mit Ursprungswerten. Erst dann Freigabe.",
-              },
-            ].map((step, i) => (
+            {TEXTS.quality.processSteps.map((step, i) => {
+              const icons = [Leaf, FlaskConical, Truck, Microscope];
+              const Icon = icons[i] || Leaf;
+              return (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -404,14 +382,14 @@ export default function QualityPage() {
                 className="text-center p-8 bg-olive-50 rounded-3xl border border-olive-100"
               >
                 <div className="w-16 h-16 bg-olive-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-6">
-                  <step.icon size={28} />
+                  <Icon size={28} />
                 </div>
                 <h3 className="text-xl mb-3">{step.title}</h3>
                 <p className="text-sm text-olive-600 leading-relaxed">
                   {step.desc}
                 </p>
               </motion.div>
-            ))}
+            )})}
           </div>
         </div>
       </section>
@@ -420,16 +398,15 @@ export default function QualityPage() {
       <section className="py-24 bg-olive-100">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <ShieldCheck className="text-olive-600 mx-auto mb-6" size={48} />
-          <h2 className="text-4xl md:text-5xl mb-6">Überzeugt?</h2>
+          <h2 className="text-4xl md:text-5xl mb-6">{TEXTS.quality.cta.headline}</h2>
           <p className="text-olive-700 text-lg mb-10">
-            Bestelle eine kostenlose Testprobe und schmecke den Unterschied, den
-            doppelte Qualitätskontrolle macht.
+            {TEXTS.quality.cta.subtext}
           </p>
           <button
             onClick={handleOrderSample}
             className="inline-flex items-center gap-2 bg-olive-600 hover:bg-olive-700 text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:-translate-y-1 shadow-lg cursor-pointer"
           >
-            Gratis Probe bestellen <ArrowRight size={22} />
+            {TEXTS.quality.cta.ctaText} <ArrowRight size={22} />
           </button>
         </div>
       </section>
