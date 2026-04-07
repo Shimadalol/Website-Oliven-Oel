@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from "motion/react";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { CartDrawer } from "./components/CartDrawer";
+import { CookieBanner } from "./components/CookieBanner";
 import { CartProvider } from "./context/CartContext";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ChevronUp } from "lucide-react";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const StoryPage = lazy(() => import("./pages/StoryPage"));
@@ -18,6 +20,7 @@ const DatenschutzPage = lazy(() => import("./pages/DatenschutzPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const ProductPage = lazy(() => import("./pages/ProductPage"));
 const SuccessPage = lazy(() => import("./pages/SuccessPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -34,6 +37,34 @@ function ScrollToTop() {
   }, [pathname, hash]);
 
   return null;
+}
+
+function ScrollTopButton() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.2 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="scroll-top-btn"
+          aria-label="Nach oben scrollen"
+        >
+          <ChevronUp size={20} />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
 }
 
 function AppLayout() {
@@ -70,11 +101,14 @@ function AppLayout() {
               <Route path="/agb" element={<TermsPage />} />
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/checkout/success" element={<SuccessPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </motion.div>
       </AnimatePresence>
       <Footer />
+      <CookieBanner />
+      <ScrollTopButton />
     </div>
   );
 }

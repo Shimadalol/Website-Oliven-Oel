@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
+import { COMPANY_INFO } from '../../config';
 
 const b2bSchema = z.object({
   name: z.string().min(2, 'Bitte Namen eingeben'),
@@ -38,8 +39,17 @@ export default function B2BPage() {
   });
 
   const onSubmit = async (data: B2BFormData) => {
-    console.log('Valid B2B lead:', data);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    if (COMPANY_INFO.formspreeUrl) {
+      const res = await fetch(COMPANY_INFO.formspreeUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) return; // Fehler still – Benutzer sieht keinen Erfolg
+    } else {
+      // Kein Formspree konfiguriert – Fallback auf mailto
+      window.location.href = `mailto:${COMPANY_INFO.contact.emailB2B}?subject=Gastro-Anfrage von ${encodeURIComponent(data.company)}&body=${encodeURIComponent(`Name: ${data.name}\nFirma: ${data.company}\nE-Mail: ${data.email}\nTelefon: ${data.phone}`)}`;
+    }
     setIsSuccess(true);
   };
 
@@ -287,15 +297,19 @@ export default function B2BPage() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 text-sm">
                     <Mail size={18} className="text-olive-600" />
-                    <span>gastro@oleaterra.de</span>
+                    <a href={`mailto:${COMPANY_INFO.contact.emailB2B}`} className="hover:text-earth-green transition-colors">
+                      {COMPANY_INFO.contact.emailB2B}
+                    </a>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <Phone size={18} className="text-olive-600" />
-                    <span>+49 (0) 69 123 456 78</span>
+                    <a href={`tel:${COMPANY_INFO.contact.phone.replace(/\s/g, '')}`} className="hover:text-earth-green transition-colors">
+                      {COMPANY_INFO.contact.phone}
+                    </a>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <MapPin size={18} className="text-olive-600" />
-                    <span>Frankfurt am Main</span>
+                    <span>{COMPANY_INFO.address.city}</span>
                   </div>
                 </div>
               </div>
