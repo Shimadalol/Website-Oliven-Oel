@@ -153,6 +153,24 @@ Ohne Formspree-URL öffnet sich beim Absenden automatisch das E-Mail-Programm al
 
 Wenn du diese ZIP-Datei erhalten hast und die Website online stellen möchtest – keine Sorge, das geht auch ohne technisches Vorwissen! Befolge einfach diese Anleitung Schritt für Schritt.
 
+### Schritt 0: Einen Code-Editor installieren
+
+Um Texte, Preise und Produkte selbst ändern zu können, brauchst du einen **Code-Editor** – das ist sowas wie Word, aber für Programmdateien. Empfohlen wird **Visual Studio Code** (kostenlos, von Microsoft):
+
+1. Gehe auf **[code.visualstudio.com](https://code.visualstudio.com)**
+2. Klicke auf den großen blauen **"Download"**-Button (das passende Betriebssystem wird automatisch erkannt)
+3. Lade die Datei herunter, öffne sie und klicke einfach durch die Installation (alle Vorgaben übernehmen)
+
+**So öffnest du das Projekt zum Bearbeiten:**
+1. VS Code starten
+2. Im Menü oben: **Datei → Ordner öffnen…**
+3. Den entpackten Projektordner (z.B. `Oliven-l-Beispiel-Website`) auswählen
+4. Auf der linken Seite siehst du jetzt alle Dateien – ein Klick auf eine Datei öffnet sie
+
+**⚠️ Ganz wichtig:** Nach **jeder** Änderung **Strg + S** drücken zum Speichern. Sonst ist die Änderung weg, sobald du die Datei schließt!
+
+---
+
 ### Schritt 1: GitHub-Account erstellen & Dateien hochladen
 GitHub ist der Ort, wo der "Quellcode" deiner Website sicher gespeichert wird.
 
@@ -183,6 +201,30 @@ Vercel nimmt deine Dateien von GitHub und macht daraus eine echte Website.
 
 ---
 
+### Schritt 4: Inhalte ändern, nachdem die Seite online ist
+
+Wenn die Seite einmal über Vercel läuft, ist der Workflow für **jede** Änderung (neuer Preis, neuer Text, neues Produkt …) immer derselbe:
+
+**Variante A — direkt im Browser auf GitHub (am einfachsten für kleine Änderungen):**
+1. Gehe auf **[github.com](https://github.com)** und logge dich ein
+2. Öffne dein Repository (z.B. `olea-terra-website`)
+3. Klicke dich zur Datei durch, die du ändern willst (z.B. `src/data.ts` für Preise/Produkte oder `config.ts` für Firmendaten)
+4. Klicke oben rechts auf das **Stift-Symbol ✏️** ("Edit this file")
+5. Ändere den Text direkt im Browser
+6. Scrolle ganz nach unten und klicke auf den grünen Button **"Commit changes"** → nochmal **"Commit changes"** im Pop-up
+7. **Fertig!** Vercel merkt automatisch, dass GitHub sich geändert hat und aktualisiert die Live-Website innerhalb von 1–2 Minuten.
+
+**Variante B — auf deinem Computer mit VS Code (für größere Änderungen):**
+1. Datei in VS Code öffnen, ändern, mit **Strg + S** speichern
+2. Den geänderten Inhalt **kopieren** (Strg + A → Strg + C)
+3. Auf GitHub die gleiche Datei wie in Variante A öffnen, auf Stift ✏️ klicken
+4. Den alten Inhalt komplett ersetzen (Strg + A → Strg + V)
+5. Unten **"Commit changes"** drücken
+
+**💡 Tipp:** Erstelle dir vor jeder größeren Änderung sicherheitshalber eine **Backup-Kopie** des Projektordners (Rechtsklick → Kopieren → an anderer Stelle einfügen). Falls etwas schief geht, hast du immer das Original.
+
+---
+
 ## Alternative für eigene Server (Für Webhoster wie IONOS / Strato)
 
 Falls du GitHub und Vercel nicht nutzen möchtest, kannst du die Website auch als fertige HTML-Dateien generieren:
@@ -190,6 +232,45 @@ Falls du GitHub und Vercel nicht nutzen möchtest, kannst du die Website auch al
 2. Öffne den Ordner im Terminal (Kommandozeile) und tippe: `npm install`
 3. Danach tippe: `npm run build`
 4. Es entsteht ein neuer Ordner namens `dist`. Nimm **nur den Inhalt** dieses `dist`-Ordners und lade ihn per FTP auf deinen Webspace bei IONOS/Strato hoch.
+
+---
+
+## Wenn was schiefgeht – Mini-FAQ
+
+**❓ Die Website zeigt eine weiße Seite oder einen Fehler.**  
+Wahrscheinlich hat sich ein Tippfehler eingeschlichen – z.B. ein fehlendes Komma, Anführungszeichen oder eine geschweifte Klammer in `config.ts` oder `src/data.ts`. Schau in der Datei nach, was du zuletzt geändert hast, und vergleiche mit den umliegenden Zeilen. Häufigste Fehler:
+- Ein **Komma vergessen** am Ende einer Zeile
+- Ein **Anführungszeichen** vergessen (`"Text"`, nicht `Text"` oder `"Text`)
+- Versehentlich eine **geschweifte Klammer `{` oder `}`** gelöscht
+
+**❓ Ich habe etwas geändert, aber online sehe ich nichts.**  
+Drei mögliche Ursachen, in der Reihenfolge prüfen:
+1. **Hast du auf GitHub committed?** Nur in VS Code speichern reicht **nicht** – die Änderung muss auch auf GitHub hochgeladen werden (siehe Schritt 4).
+2. **Vercel braucht 1–2 Minuten** zum Aktualisieren. Geduld, dann den Browser mit **Strg + F5** neu laden.
+3. **Browser-Cache:** Falls auch nach 5 Minuten nichts kommt, Browser komplett schließen und neu öffnen.
+
+**❓ Ich habe versehentlich etwas kaputt gemacht – wie komme ich zurück?**  
+Über GitHub: 
+1. Im Repository auf den Reiter **"Commits"** klicken (oben in der Dateiliste)
+2. Bei einem alten, funktionierenden Eintrag rechts auf die drei Punkte **…** klicken → **"Revert"** wählen
+3. Bestätigen – Vercel deployt dann automatisch wieder die alte Version
+
+**❓ `npm install` schlägt fehl.**  
+Meistens ist Node.js nicht installiert oder veraltet. Lösung:
+1. Aktuelle Version von **[nodejs.org](https://nodejs.org)** herunterladen (die **LTS**-Variante reicht)
+2. Installieren (alle Vorgaben übernehmen)
+3. Terminal/PowerShell **komplett schließen und neu öffnen** (wichtig!)
+4. Nochmal `npm install` versuchen
+
+**❓ Ich möchte ein eigenes Bild hinzufügen – welche Größe?**  
+- **Format:** JPG (für Fotos) oder PNG (für Grafiken mit transparentem Hintergrund)
+- **Breite:** 1200–1600 Pixel reichen für alles auf der Website
+- **Dateigröße:** unter 500 KB pro Bild halten – größere Bilder vorher mit **[tinypng.com](https://tinypng.com)** kostenlos komprimieren
+- **Speicherort:** Ordner `public/images/` anlegen (falls nicht vorhanden), Bild dort ablegen
+- **Verwenden:** in `src/data.ts` als `"/images/dein-bild.jpg"` referenzieren (mit Schrägstrich vorne!)
+
+**❓ Ich brauche Hilfe und komme nicht weiter.**  
+Mache einen **Screenshot** vom Fehler (mit der **kompletten** Fehlermeldung – nicht nur ausschnittweise!) und schicke ihn an die Person, die dir die Website gemacht hat. Ohne vollständigen Screenshot kann oft niemand helfen.
 
 ---
 
