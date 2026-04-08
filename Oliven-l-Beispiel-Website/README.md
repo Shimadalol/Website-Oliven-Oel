@@ -63,14 +63,14 @@ Nahezu alle festen Texte der Website (Überschriften, Slogans, Absätze auf der 
 
 Jedes Produkt hat folgende Felder:
 
-| Feld | Beschreibung |
-|------|-------------|
-| `name` | Produktname |
-| `description` | Kurzbeschreibung |
-| `price` | Preis als Zahl (z.B. `64.99`) |
-| `size` | Gebindegröße (z.B. `"3L"`, `"500ml"`) |
-| `image` | URL zum Produktbild (Unsplash-Link durch eigenes Foto ersetzen) |
-| `category` | `"bottle"`, `"canister"` oder `"bundle"` |
+| Feld          | Beschreibung                                                    |
+| ------------- | --------------------------------------------------------------- |
+| `name`        | Produktname                                                     |
+| `description` | Kurzbeschreibung                                                |
+| `price`       | Preis als Zahl (z.B. `64.99`)                                   |
+| `size`        | Gebindegröße (z.B. `"3L"`, `"500ml"`)                           |
+| `image`       | URL zum Produktbild (Unsplash-Link durch eigenes Foto ersetzen) |
+| `category`    | `"bottle"`, `"canister"` oder `"bundle"`                        |
 
 **Produkt hinzufügen:** Einfach einen neuen Block im `PRODUCTS`-Array kopieren und ausfüllen.  
 **Produkt entfernen:** Den gesamten Block `{ ... },` löschen.
@@ -97,17 +97,17 @@ Im `TESTIMONIALS`-Array echte Kundenbewertungen eintragen:
 
 Im `FARMERS`-Array befinden sich die Karten auf der „Geschichte"-Seite.
 
-| Feld | Beschreibung |
-|------|-------------|
-| `name` | Name der Familie |
-| `region` | Region / Herkunftsort |
-| `country` | Land |
-| `specialty` | Kurze Spezialität |
-| `since` | „Seit X Generationen" |
-| `image` | Foto der Farm (URL oder lokaler Pfad) |
-| `fullStory` | Langer Text im Popup |
-| `fields` | Liste der Felder (als Tags angezeigt) |
-| `tradition` | Besondere Produktionstradition |
+| Feld        | Beschreibung                          |
+| ----------- | ------------------------------------- |
+| `name`      | Name der Familie                      |
+| `region`    | Region / Herkunftsort                 |
+| `country`   | Land                                  |
+| `specialty` | Kurze Spezialität                     |
+| `since`     | „Seit X Generationen"                 |
+| `image`     | Foto der Farm (URL oder lokaler Pfad) |
+| `fullStory` | Langer Text im Popup                  |
+| `fields`    | Liste der Felder (als Tags angezeigt) |
+| `tradition` | Besondere Produktionstradition        |
 
 ---
 
@@ -126,11 +126,11 @@ Eigene Fotos so einbinden:
 
 ### 7. Rechtstexte → `src/pages/`
 
-| Datei | Seite |
-|-------|-------|
-| `src/pages/ImpressumPage.tsx` | Impressum (Daten kommen aus `config.ts`) |
-| `src/pages/TermsPage.tsx` | AGB |
-| `src/pages/DatenschutzPage.tsx` | Datenschutzerklärung |
+| Datei                           | Seite                                    |
+| ------------------------------- | ---------------------------------------- |
+| `src/pages/ImpressumPage.tsx`   | Impressum (Daten kommen aus `config.ts`) |
+| `src/pages/TermsPage.tsx`       | AGB                                      |
+| `src/pages/DatenschutzPage.tsx` | Datenschutzerklärung                     |
 
 **⚠️ Wichtig:** AGB und Datenschutz enthalten Mustertexte mit `[ANPASSEN: ...]`-Markierungen.
 Diese Stellen müssen vor der Liveschaltung von einem Rechtsanwalt geprüft und ausgefüllt werden.
@@ -149,6 +149,98 @@ Ohne Formspree-URL öffnet sich beim Absenden automatisch das E-Mail-Programm al
 
 ---
 
+## Hosting & Domain – Überblick (vor der Anleitung lesen)
+
+Bevor du mit der Schritt-für-Schritt-Anleitung startest, hier ein kurzer Überblick, **was Hosting und Domain überhaupt sind**, welche Anbieter es gibt und mit welchen Kosten du rechnen musst.
+
+### Was ist eigentlich was?
+
+| Begriff         | Erklärung                                                                                   | Beispiel                                 |
+| --------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **Hosting**     | Der „Computer im Internet", auf dem deine Website liegt und rund um die Uhr erreichbar ist. | Vercel, Netlify, IONOS                   |
+| **Domain**      | Die Webadresse, unter der deine Seite erreichbar ist.                                       | `deine-olivenoel.de`                     |
+| **DNS**         | Eine Art Telefonbuch, das die Domain mit dem Hosting verbindet.                             | (wird beim Domain-Anbieter eingestellt)  |
+| **SSL / HTTPS** | Die Verschlüsselung (das grüne Schloss im Browser). Heute Pflicht.                          | wird bei Vercel automatisch eingerichtet |
+
+### Hosting – welche Optionen gibt es?
+
+Diese Website ist ein **React/Vite-Projekt** und wird nach dem Build zu reinen HTML-/CSS-/JS-Dateien. Das heißt: **teures Hosting ist nicht nötig.** Es gibt mehrere gute Optionen:
+
+**1. Vercel** ⭐ _(für diese Website empfohlen)_
+
+- **Kostenlos** für private/kleine Projekte
+- Automatisches Deployment aus GitHub (Änderung pushen → Seite ist live)
+- Eigene Domain kostenlos anbindbar
+- HTTPS/SSL automatisch
+- Perfekt für Vite/React-Projekte
+- → genau dieser Weg wird in der Anleitung unten beschrieben
+
+**2. Netlify**
+
+- Sehr ähnlich zu Vercel, ebenfalls kostenlos
+- Gleiche Features, Drag-and-Drop-Deploy möglich
+
+**3. GitHub Pages**
+
+- Komplett kostenlos, direkt aus dem GitHub-Repo
+- Etwas mehr Konfiguration nötig bei Vite
+
+**4. Klassisches Webhosting (IONOS, Strato, Hetzner, …)**
+
+- Ca. **2–10 €/Monat**
+- Nur sinnvoll, wenn du zusätzlich **E-Mail-Postfächer** (`kontakt@deine-domain.de`) im selben Paket haben willst
+- Upload erfolgt per FTP (siehe Abschnitt „Alternative für eigene Server" weiter unten)
+
+### Domain – wo kaufen?
+
+Eine Domain ist die Adresse, unter der deine Seite läuft (z.B. `deine-olivenoel.de`). Sie wird **separat** vom Hosting gekauft und läuft pro Jahr.
+
+**Empfohlene Registrare:**
+
+| Anbieter                 | Vorteile                                | Preis `.de`   |
+| ------------------------ | --------------------------------------- | ------------- |
+| **INWX**                 | Günstig, seriös, gutes Interface        | ~5 €/Jahr     |
+| **Cloudflare Registrar** | Zum Einkaufspreis (keine Marge)         | ~5 €/Jahr     |
+| **Namecheap**            | International, günstig                  | ~6 €/Jahr     |
+| **IONOS / Strato**       | Deutscher Support, oft mit E-Mail-Paket | ~10–15 €/Jahr |
+
+**Typische Preise nach Endung:**
+
+- `.de` → **5–15 €/Jahr**
+- `.com` → **10–15 €/Jahr**
+- `.shop` / `.bio` / `.oil` → **20–50 €/Jahr**
+
+### Gesamtkosten auf einen Blick
+
+Wenn du dem empfohlenen Weg (Vercel + eigene Domain) folgst:
+
+| Posten                     | Kosten                           |
+| -------------------------- | -------------------------------- |
+| Hosting (Vercel Free Tier) | **0 €**                          |
+| Domain (.de bei INWX o.ä.) | **~5–15 €/Jahr**                 |
+| SSL/HTTPS                  | **0 €** (automatisch via Vercel) |
+| **Gesamt**                 | **ca. 5–15 €/Jahr**              |
+
+Wenn du zusätzlich eine eigene E-Mail-Adresse (`kontakt@deine-domain.de`) möchtest, kommt entweder ein E-Mail-Dienst dazu (z.B. Mailbox.org ~1 €/Monat) **oder** du nimmst gleich ein Paket mit Domain + E-Mail bei IONOS/Strato.
+
+### Typischer Ablauf (Kurzversion)
+
+1. **Domain kaufen** beim Registrar deiner Wahl (z.B. INWX)
+2. **GitHub-Account** erstellen und Projekt hochladen
+3. **Vercel-Account** erstellen und mit GitHub verbinden
+4. Projekt in Vercel importieren → automatisches Deployment
+5. In Vercel: Domain hinzufügen → DNS-Einstellungen beim Registrar anpassen (Vercel zeigt dir die genauen Werte)
+6. **Fertig** – Seite läuft unter deiner Domain mit automatischem HTTPS
+
+Die genauen Schritte folgen jetzt im nächsten Abschnitt.
+
+### Nicht vergessen: Pflichten in Deutschland
+
+- **Impressum & Datenschutz**: In Deutschland **Pflicht für jede Website** (auch für nicht-kommerzielle!). Die Seiten `ImpressumPage.tsx`, `TermsPage.tsx` und `DatenschutzPage.tsx` sind bereits vorbereitet – sie müssen aber vor der Liveschaltung mit deinen **echten Daten** gefüllt und idealerweise von einem Anwalt geprüft werden.
+- **Kontaktformular**: Damit das Formular wirklich E-Mails verschickt, brauchst du einen Service wie **Formspree** (siehe Abschnitt 8 oben) oder einen eigenen Backend-Dienst.
+
+---
+
 ## Anleitung für Anfänger (Ohne Programmierkenntnisse)
 
 Wenn du diese ZIP-Datei erhalten hast und die Website online stellen möchtest – keine Sorge, das geht auch ohne technisches Vorwissen! Befolge einfach diese Anleitung Schritt für Schritt.
@@ -162,6 +254,7 @@ Um Texte, Preise und Produkte selbst ändern zu können, brauchst du einen **Cod
 3. Lade die Datei herunter, öffne sie und klicke einfach durch die Installation (alle Vorgaben übernehmen)
 
 **So öffnest du das Projekt zum Bearbeiten:**
+
 1. VS Code starten
 2. Im Menü oben: **Datei → Ordner öffnen…**
 3. Den entpackten Projektordner (z.B. `Oliven-l-Beispiel-Website`) auswählen
@@ -172,6 +265,7 @@ Um Texte, Preise und Produkte selbst ändern zu können, brauchst du einen **Cod
 ---
 
 ### Schritt 1: GitHub-Account erstellen & Dateien hochladen
+
 GitHub ist der Ort, wo der "Quellcode" deiner Website sicher gespeichert wird.
 
 1. Gehe auf **[github.com](https://github.com)** und klicke oben rechts auf **"Sign up"**, um ein kostenloses Konto zu erstellen.
@@ -179,11 +273,12 @@ GitHub ist der Ort, wo der "Quellcode" deiner Website sicher gespeichert wird.
 3. Bei "Repository name" gib einen Namen ein (z.B. `olea-terra-website`). Lass alles andere so wie es ist und klicke ganz unten auf den grünen Button **"Create repository"**.
 4. Auf der nächsten Seite siehst du viele Befehle. Klicke dort auf den blauen Link **"uploading an existing file"**.
 5. **WICHTIG:** Entpacke (falls noch nicht geschehen) die ZIP-Datei, die du erhalten hast, auf deinem Computer.
-6. Ziehe **alle Dateien und Ordner** aus dem entpackten Ordner per Drag & Drop in das Feld auf GitHub. 
-   *(Hinweis: Falls ein Ordner namens `node_modules` existiert, lade diesen **nicht** mit hoch!)*
+6. Ziehe **alle Dateien und Ordner** aus dem entpackten Ordner per Drag & Drop in das Feld auf GitHub.
+   _(Hinweis: Falls ein Ordner namens `node_modules` existiert, lade diesen **nicht** mit hoch!)_
 7. Scrolle nach unten und klicke auf den grünen Button **"Commit changes"**. Das dauert jetzt einen Moment.
 
 ### Schritt 2: Vercel nutzen, um die Website online zu bringen
+
 Vercel nimmt deine Dateien von GitHub und macht daraus eine echte Website.
 
 1. Gehe auf **[vercel.com](https://vercel.com)** und klicke auf **"Sign Up"**.
@@ -194,6 +289,7 @@ Vercel nimmt deine Dateien von GitHub und macht daraus eine echte Website.
 6. Jetzt siehst du, wie Vercel arbeitet. Nach 1-2 Minuten fliegen Konfetti über den Bildschirm – deine Website ist online!
 
 ### Schritt 3: Eigene Domain (z.B. www.deine-domain.de) verknüpfen
+
 1. Klicke in Vercel nach dem erfolgreichen "Deploy" auf **"Continue to Dashboard"**.
 2. Oben im Menü klicke auf **"Settings"** und dann links auf **"Domains"**.
 3. Trage deine gewünschte Internetadresse ein (die du z.B. bei IONOS, Strato oder Checkdomain gekauft hast) und klicke auf **"Add"**.
@@ -206,6 +302,7 @@ Vercel nimmt deine Dateien von GitHub und macht daraus eine echte Website.
 Wenn die Seite einmal über Vercel läuft, ist der Workflow für **jede** Änderung (neuer Preis, neuer Text, neues Produkt …) immer derselbe:
 
 **Variante A — direkt im Browser auf GitHub (am einfachsten für kleine Änderungen):**
+
 1. Gehe auf **[github.com](https://github.com)** und logge dich ein
 2. Öffne dein Repository (z.B. `olea-terra-website`)
 3. Klicke dich zur Datei durch, die du ändern willst (z.B. `src/data.ts` für Preise/Produkte oder `config.ts` für Firmendaten)
@@ -215,6 +312,7 @@ Wenn die Seite einmal über Vercel läuft, ist der Workflow für **jede** Änder
 7. **Fertig!** Vercel merkt automatisch, dass GitHub sich geändert hat und aktualisiert die Live-Website innerhalb von 1–2 Minuten.
 
 **Variante B — auf deinem Computer mit VS Code (für größere Änderungen):**
+
 1. Datei in VS Code öffnen, ändern, mit **Strg + S** speichern
 2. Den geänderten Inhalt **kopieren** (Strg + A → Strg + C)
 3. Auf GitHub die gleiche Datei wie in Variante A öffnen, auf Stift ✏️ klicken
@@ -228,6 +326,7 @@ Wenn die Seite einmal über Vercel läuft, ist der Workflow für **jede** Änder
 ## Alternative für eigene Server (Für Webhoster wie IONOS / Strato)
 
 Falls du GitHub und Vercel nicht nutzen möchtest, kannst du die Website auch als fertige HTML-Dateien generieren:
+
 1. Erfordert [Node.js](https://nodejs.org).
 2. Öffne den Ordner im Terminal (Kommandozeile) und tippe: `npm install`
 3. Danach tippe: `npm run build`
@@ -239,49 +338,49 @@ Falls du GitHub und Vercel nicht nutzen möchtest, kannst du die Website auch al
 
 **❓ Die Website zeigt eine weiße Seite oder einen Fehler.**  
 Wahrscheinlich hat sich ein Tippfehler eingeschlichen – z.B. ein fehlendes Komma, Anführungszeichen oder eine geschweifte Klammer in `config.ts` oder `src/data.ts`. Schau in der Datei nach, was du zuletzt geändert hast, und vergleiche mit den umliegenden Zeilen. Häufigste Fehler:
+
 - Ein **Komma vergessen** am Ende einer Zeile
 - Ein **Anführungszeichen** vergessen (`"Text"`, nicht `Text"` oder `"Text`)
 - Versehentlich eine **geschweifte Klammer `{` oder `}`** gelöscht
 
 **❓ Ich habe etwas geändert, aber online sehe ich nichts.**  
 Drei mögliche Ursachen, in der Reihenfolge prüfen:
+
 1. **Hast du auf GitHub committed?** Nur in VS Code speichern reicht **nicht** – die Änderung muss auch auf GitHub hochgeladen werden (siehe Schritt 4).
 2. **Vercel braucht 1–2 Minuten** zum Aktualisieren. Geduld, dann den Browser mit **Strg + F5** neu laden.
 3. **Browser-Cache:** Falls auch nach 5 Minuten nichts kommt, Browser komplett schließen und neu öffnen.
 
 **❓ Ich habe versehentlich etwas kaputt gemacht – wie komme ich zurück?**  
-Über GitHub: 
+Über GitHub:
+
 1. Im Repository auf den Reiter **"Commits"** klicken (oben in der Dateiliste)
 2. Bei einem alten, funktionierenden Eintrag rechts auf die drei Punkte **…** klicken → **"Revert"** wählen
 3. Bestätigen – Vercel deployt dann automatisch wieder die alte Version
 
 **❓ `npm install` schlägt fehl.**  
 Meistens ist Node.js nicht installiert oder veraltet. Lösung:
+
 1. Aktuelle Version von **[nodejs.org](https://nodejs.org)** herunterladen (die **LTS**-Variante reicht)
 2. Installieren (alle Vorgaben übernehmen)
 3. Terminal/PowerShell **komplett schließen und neu öffnen** (wichtig!)
 4. Nochmal `npm install` versuchen
 
-**❓ Ich möchte ein eigenes Bild hinzufügen – welche Größe?**  
+**❓ Ich möchte ein eigenes Bild hinzufügen – welche Größe?**
+
 - **Format:** JPG (für Fotos) oder PNG (für Grafiken mit transparentem Hintergrund)
 - **Breite:** 1200–1600 Pixel reichen für alles auf der Website
 - **Dateigröße:** unter 500 KB pro Bild halten – größere Bilder vorher mit **[tinypng.com](https://tinypng.com)** kostenlos komprimieren
 - **Speicherort:** Ordner `public/images/` anlegen (falls nicht vorhanden), Bild dort ablegen
 - **Verwenden:** in `src/data.ts` als `"/images/dein-bild.jpg"` referenzieren (mit Schrägstrich vorne!)
 
-**❓ Ich brauche Hilfe und komme nicht weiter.**  
-Mache einen **Screenshot** vom Fehler (mit der **kompletten** Fehlermeldung – nicht nur ausschnittweise!) und schicke ihn an die Person, die dir die Website gemacht hat. Ohne vollständigen Screenshot kann oft niemand helfen.
-
----
-
 ## Technischer Stack (zur Info)
 
-| Technologie | Zweck |
-|-------------|-------|
-| React 19 + TypeScript | UI-Framework |
-| Vite | Build-Tool |
-| Tailwind CSS 4 | Styling |
-| Framer Motion | Animationen |
-| React Router 7 | Seitennavigation |
+| Technologie           | Zweck               |
+| --------------------- | ------------------- |
+| React 19 + TypeScript | UI-Framework        |
+| Vite                  | Build-Tool          |
+| Tailwind CSS 4        | Styling             |
+| Framer Motion         | Animationen         |
+| React Router 7        | Seitennavigation    |
 | React Hook Form + Zod | Formularvalidierung |
-| Lucide React | Icons |
+| Lucide React          | Icons               |
